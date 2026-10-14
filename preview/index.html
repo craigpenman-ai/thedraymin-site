@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>The Draymin | Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0b0d;--paper:#f4f1ea;--acid:#d7ff3a;--blue:#4f7cff;--muted:#9a9aa3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.9}
+.kicker{font-weight:800;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acid)}
+.draft{position:fixed;bottom:14px;left:14px;z-index:60;background:var(--acid);color:var(--ink);font-weight:800;font-size:.7rem;letter-spacing:.12em;padding:6px 10px;border-radius:4px;text-transform:uppercase}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;mix-blend-mode:difference}
+nav .logo{font-family:Anton,sans-serif;font-size:1.4rem;letter-spacing:.04em;text-decoration:none}
+nav ul{list-style:none;display:flex;gap:22px;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em}
+nav ul a{text-decoration:none}
+@media(max-width:760px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform .2s linear}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.15) 30%,rgba(11,11,13,.95))}
+.hero .inner{position:relative;z-index:2;padding:0 24px 64px;width:100%;max-width:1180px;margin:0 auto}
+.hero h1{font-size:clamp(4.2rem,15vw,13rem)}
+.hero h1 span{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.hero p{max-width:520px;font-size:1.1rem;margin-top:14px}
+.cheer{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--acid);color:var(--ink);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;padding:14px 22px;border-radius:999px;text-decoration:none;user-select:none}
+.btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 2px var(--paper)}
+.meter{width:200px;height:12px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--acid));transition:width .15s}
+.meter-label{font-size:.8rem;color:var(--muted);min-width:150px}
+
+/* sections */
+section{padding:110px 0}
+h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
+.lede{font-size:1.2rem;max-width:680px;color:#d9d6cf}
+
+/* marquee */
+.marquee{background:var(--acid);color:var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0}
+.marquee div{display:inline-block;font-family:Anton,sans-serif;font-size:2rem;text-transform:uppercase;animation:scroll 30s linear infinite}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* story timeline */
+.timeline{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 24px 30px;margin:0 -24px;scrollbar-width:thin}
+.stop{flex:0 0 min(78vw,340px);scroll-snap-align:start;background:#16161a;border-radius:18px;padding:26px;position:relative;border-top:4px solid var(--acid)}
+.stop .yr{font-family:Anton,sans-serif;font-size:3.2rem;color:var(--acid);line-height:1}
+.stop h3{font-size:1.15rem;margin:10px 0 8px}
+.stop p{color:#c9c6bf;font-size:.95rem}
+.stop.big{background:var(--blue)}
+.stop.big .yr{color:var(--paper)}
+.stop.big p{color:#eef}
+.hint{color:var(--muted);font-size:.85rem;margin-top:6px}
+
+/* band */
+.band{display:grid;grid-template-columns:1.25fr 1fr;gap:40px;align-items:center}
+.band img{border-radius:18px}
+.members{list-style:none;display:grid;gap:12px;margin-top:20px}
+.members li{display:flex;justify-content:space-between;border-bottom:1px solid #2a2a30;padding:12px 0;font-weight:600;font-size:1.1rem}
+.members li em{font-style:normal;color:var(--muted);font-weight:400}
+@media(max-width:860px){.band{grid-template-columns:1fr}}
+
+/* music */
+.releases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.rel{background:#16161a;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .3s}
+.rel:hover{transform:translateY(-6px) rotate(-1deg)}
+.rel .cover{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:2.4rem;text-transform:uppercase;text-align:center;padding:20px}
+.rel .meta{padding:20px}
+.rel .meta small{color:var(--muted)}
+.rel .story{max-height:0;overflow:hidden;transition:max-height .4s;color:#c9c6bf;font-size:.95rem}
+.rel.open .story{max-height:240px;margin-top:10px}
+
+/* full bleed photo */
+.bleed{height:70vh;background:url(img/alhambra-bw.webp) center/cover fixed;display:flex;align-items:center;justify-content:center;text-align:center}
+.bleed h2{text-shadow:0 4px 30px rgba(0,0,0,.6)}
+@media(max-width:760px){.bleed{background-attachment:scroll}}
+
+/* gigs */
+.gigs{background:var(--paper);color:var(--ink)}
+.gigs .kicker{color:var(--blue)}
+.gigs .lede{color:#333}
+.secret{margin-top:30px;border:3px dashed var(--ink);border-radius:18px;padding:34px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.secret .display{font-size:2.4rem}
+.signup{display:flex;gap:10px;flex-wrap:wrap}
+.signup input{padding:14px 18px;border-radius:999px;border:2px solid var(--ink);font:inherit;min-width:240px}
+.signup .btn{background:var(--ink);color:var(--paper)}
+.wyt{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.wyt img{border-radius:18px}
+@media(max-width:860px){.wyt{grid-template-columns:1fr}}
+
+/* merch */
+.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.item{border-radius:18px;padding:30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.item.dray{background:var(--paper);color:var(--ink)}
+.item.merch{background:var(--blue)}
+.item.lyr{background:#16161a;border:2px solid #2a2a30}
+.item .display{font-size:3rem}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:var(--acid);color:var(--ink)}
+
+/* video */
+.vid{aspect-ratio:16/9;border-radius:18px;background:#16161a url(img/alhambra-back.webp) center/cover;position:relative;display:flex;align-items:center;justify-content:center}
+.vid:before{content:"";position:absolute;inset:0;background:rgba(11,11,13,.55);border-radius:18px}
+.vid span{position:relative;font-family:Anton,sans-serif;font-size:2rem;text-transform:uppercase}
+
+footer{padding:60px 0;border-top:1px solid #222;color:var(--muted);font-size:.85rem}
+footer .display{font-size:3rem;color:var(--paper)}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="draft">Draft preview</div>
+
+<nav>
+  <a class="logo" href="#top">THE DRAYMIN</a>
+  <ul>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#gigs">Gigs</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#video">Video</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <img id="heroImg" src="img/alhambra-crowd.webp" alt="The Draymin on stage at the Alhambra Theatre, Dunfermline, with a full crowd behind them">
+  <div class="inner">
+    <div class="kicker">Rosyth. Dunfermline. Since 2005.</div>
+    <h1 class="display" id="wordmark">The Draymin</h1>
+    <p>Indie dance from the Kingdom of Fife. 1,700 people at the Alhambra said it was time to come back. So we did.</p>
+    <div class="cheer">
+      <button class="btn" id="noise">Hold to make some noise</button>
+      <div>
+        <div class="meter"><i id="level"></i></div>
+        <div class="meter-label" id="levelLabel">The Alhambra is waiting</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee"><div>T in the Park &nbsp;&bull;&nbsp; SXSW &nbsp;&bull;&nbsp; EMI London &nbsp;&bull;&nbsp; The Charlatans &nbsp;&bull;&nbsp; The Coral &nbsp;&bull;&nbsp; Alhambra sold out &nbsp;&bull;&nbsp; T in the Park &nbsp;&bull;&nbsp; SXSW &nbsp;&bull;&nbsp; EMI London &nbsp;&bull;&nbsp; The Charlatans &nbsp;&bull;&nbsp; The Coral &nbsp;&bull;&nbsp; Alhambra sold out &nbsp;&bull;&nbsp;</div></div>
+
+<section id="story">
+  <div class="wrap">
+    <div class="kicker">The story</div>
+    <h2 class="display reveal">Twenty years<br>in Fife</h2>
+    <div class="timeline">
+      <div class="stop"><div class="yr">2005</div><h3>It starts in Rosyth</h3><p>Fraz, Craig, Gec and Gaz start a band. [Placeholder: how it began, in the band's words.]</p></div>
+      <div class="stop"><div class="yr">The run</div><h3>T in the Park and SXSW</h3><p>From Fife to Balado to Austin, Texas. [Placeholder: a story from each, plus years.]</p></div>
+      <div class="stop"><div class="yr">EMI</div><h3>Sessions in London</h3><p>Recording at EMI in London. [Placeholder: what happened, what came out of it.]</p></div>
+      <div class="stop"><div class="yr">Support</div><h3>The Charlatans and The Coral</h3><p>On the road with heroes. [Placeholder: best memory from those shows.]</p></div>
+      <div class="stop"><div class="yr">2012</div><h3>Should've Known Better</h3><p>The album, released on Townsend Records.</p></div>
+      <div class="stop"><div class="yr">2015</div><h3>Dangerous Door</h3><p>The single. Then a long quiet spell.</p></div>
+      <div class="stop big"><div class="yr">2026</div><h3>Back at the Alhambra</h3><p>Saturday 3 October 2026. The first hometown show in 11 years. Sold out.</p></div>
+    </div>
+    <div class="hint">Swipe or scroll sideways</div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap band">
+    <img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door">
+    <div>
+      <div class="kicker">The band</div>
+      <h2 class="display reveal">Four lads<br>one door</h2>
+      <ul class="members">
+        <li>Fraz Penman <em>[Role TBC]</em></li>
+        <li>Craig Penman <em>Lead guitar</em></li>
+        <li>Gec Livingstone <em>[Role TBC]</em></li>
+        <li>Gaz Louch <em>[Role TBC]</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="bleed"><h2 class="display">Should've<br>known better</h2></div>
+
+<section id="music">
+  <div class="wrap">
+    <div class="kicker">Music</div>
+    <h2 class="display reveal">Press play</h2>
+    <div class="releases">
+      <div class="rel" tabindex="0">
+        <div class="cover" style="background:var(--acid);color:var(--ink)">Should've<br>Known Better</div>
+        <div class="meta"><strong>Should've Known Better</strong><br><small>Album, 2012, Townsend Records. Tap for the story.</small>
+          <div class="story">[Placeholder: the story behind the album, a favourite track, a link to stream.]</div></div>
+      </div>
+      <div class="rel" tabindex="0">
+        <div class="cover" style="background:var(--blue)">Dangerous<br>Door</div>
+        <div class="meta"><strong>Dangerous Door</strong><br><small>Single, 2015. Tap for the story.</small>
+          <div class="story">[Placeholder: the story behind the single, a link to stream.]</div></div>
+      </div>
+      <div class="rel" tabindex="0">
+        <div class="cover" style="background:#16161a;border:2px dashed #444;color:var(--muted)">New<br>music?</div>
+        <div class="meta"><strong>Watch this space</strong><br><small>Tap if you're curious.</small>
+          <div class="story">Nothing to say yet. Sign up below and you'll hear first.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gigs" class="gigs">
+  <div class="wrap">
+    <div class="kicker">Gigs</div>
+    <h2 class="display reveal">Next one?</h2>
+    <p class="lede">Nothing announced yet. Mailing list first, everyone else after.</p>
+    <div class="secret">
+      <div class="display">Hear it first</div>
+      <form class="signup" onsubmit="event.preventDefault();this.querySelector('button').textContent='Coming soon';">
+        <input type="email" placeholder="Your email" aria-label="Your email">
+        <button class="btn" type="submit">Sign me up</button>
+      </form>
+    </div>
+    <div class="wyt">
+      <img class="reveal" src="img/stage-door-tall.webp" alt="The Draymin leaning against a shutter outside a stage door" style="max-height:520px;object-fit:cover;width:100%">
+      <div>
+        <div class="kicker">Coming soon</div>
+        <h2 class="display" style="font-size:clamp(2.6rem,6vw,4.6rem)">Were you<br>there?</h2>
+        <p class="lede">Every Draymin gig we can remember, on one map. Tell us the ones we forgot. Send your photos, ticket stubs and stories, and we'll put the best ones up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="merch">
+  <div class="wrap">
+    <div class="kicker">Merch</div>
+    <h2 class="display reveal">Wear it</h2>
+    <div class="shop">
+      <div class="item dray"><span class="tag">Coming soon</span><div><div class="display">DRAY</div><p>Fraser's clothing label. [Placeholder: products, photos, prices.]</p></div></div>
+      <div class="item merch"><span class="tag">Coming soon</span><div><div class="display">The Draymin</div><p>Proper band merch. [Placeholder: tees, posters and more.]</p></div></div>
+      <div class="item lyr"><span class="tag">Coming soon</span><div><div class="display">Lyrics</div><p>Every word, plus the stories behind them.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="video" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Video</div>
+    <h2 class="display reveal">Watch it</h2>
+    <div class="vid"><span>[Placeholder: Alhambra clip]</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="display">The Draymin</div>
+    <p>Rosyth and Dunfermline, Fife. Draft preview, not live.</p>
+  </div>
+</footer>
+
+<script>
+// hero parallax
+const hero=document.getElementById('heroImg');
+addEventListener('scroll',()=>{hero.style.transform=`scale(1.08) translateY(${scrollY*0.25}px)`},{passive:true});
+
+// make some noise
+const btn=document.getElementById('noise'),lvl=document.getElementById('level'),lab=document.getElementById('levelLabel'),word=document.getElementById('wordmark');
+word.innerHTML=[...word.textContent].map(c=>c===' '?' ':`<span>${c}</span>`).join('');
+const letters=word.querySelectorAll('span');
+let v=0,holding=false;
+const labels=['The Alhambra is waiting','Getting there','Louder','That is a Fife crowd','ONE MORE TUNE'];
+function tick(){
+  v=holding?Math.min(100,v+2.2):Math.max(0,v-1.4);
+  lvl.style.width=v+'%';
+  lab.textContent=labels[Math.min(4,Math.floor(v/20))];
+  letters.forEach((s,i)=>{s.style.transform=holding?`translateY(${Math.sin(Date.now()/90+i)*v/9}px)`:'none'});
+  requestAnimationFrame(tick);
+}
+tick();
+['mousedown','touchstart'].forEach(e=>btn.addEventListener(e,ev=>{ev.preventDefault();holding=true},{passive:false}));
+['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>btn.addEventListener(e,()=>holding=false));
+btn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();holding=true}});
+btn.addEventListener('keyup',()=>holding=false);
+
+// release flip
+document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('open');r.addEventListener('click',t);r.addEventListener('keydown',e=>{if(e.key==='Enter')t()})});
+
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
