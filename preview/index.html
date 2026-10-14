@@ -25,15 +25,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:
 nav .logo{font-family:Anton,sans-serif;font-size:1.4rem;letter-spacing:.04em;text-decoration:none}
 nav ul{list-style:none;display:flex;gap:22px;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.1em}
 nav ul a{text-decoration:none}
-@media(max-width:760px){nav ul{display:none}}
+.burger{display:none;background:none;border:0;cursor:pointer;width:34px;height:26px;position:relative;z-index:61}
+.burger i{position:absolute;left:0;right:0;height:3px;background:var(--paper);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger i:nth-child(1){top:2px}.burger i:nth-child(2){top:11px}.burger i:nth-child(3){top:20px}
+nav.open{mix-blend-mode:normal}
+nav.open .burger i:nth-child(1){transform:translateY(9px) rotate(45deg)}
+nav.open .burger i:nth-child(2){opacity:0}
+nav.open .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+@media(max-width:760px){
+  .burger{display:block}
+  nav ul{position:fixed;inset:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:26px;font-family:Anton,sans-serif;font-size:2.6rem;letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .3s}
+  nav.open ul{opacity:1;pointer-events:auto}
+  nav ul a:hover{color:var(--acid)}
+}
 
 /* press */
-.board{position:relative;display:flex;flex-wrap:wrap;gap:28px;justify-content:center;padding:30px 0;touch-action:pan-y}
-.cut{margin:0;background:#f4efe3;padding:8px;box-shadow:0 14px 30px rgba(0,0,0,.45);transform:translate(var(--x,0),var(--y,0)) rotate(var(--r));cursor:grab;transition:box-shadow .2s;position:relative;user-select:none}
+.board{position:relative;height:780px;margin-top:30px}
+.cut{margin:0;position:absolute;background:#f4efe3;padding:7px;box-shadow:0 14px 30px rgba(0,0,0,.5);transform:translate(var(--x,0),var(--y,0)) rotate(var(--r));cursor:grab;user-select:none;touch-action:none;transition:box-shadow .2s}
 .cut:before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:22px;margin-left:-35px;background:rgba(220,255,60,.75);transform:rotate(-3deg)}
-.cut img{display:block;max-width:220px;max-height:260px;width:auto;height:auto;pointer-events:none}
-.cut:hover{box-shadow:0 22px 44px rgba(0,0,0,.6);z-index:5}
-.cut.drag{cursor:grabbing;z-index:9;box-shadow:0 30px 60px rgba(0,0,0,.7)}
+.cut img{display:block;max-width:230px;max-height:250px;width:auto;height:auto;pointer-events:none}
+@media(max-width:760px){.board{height:640px}.cut img{max-width:130px;max-height:150px}}
+.cut:hover{box-shadow:0 22px 44px rgba(0,0,0,.65)}
+.cut.drag{cursor:grabbing;box-shadow:0 30px 60px rgba(0,0,0,.7)}
 #lightbox{position:fixed;inset:0;background:rgba(11,11,13,.92);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:100;padding:24px;cursor:zoom-out}
 #lightbox.on{display:flex}
 #lightbox img{max-width:min(92vw,1000px);max-height:80vh;box-shadow:0 20px 60px #000}
@@ -46,6 +59,13 @@ nav ul a{text-decoration:none}
 .hero h1{font-size:clamp(3.4rem,9vw,8rem);line-height:.9}
 .hero h1 span{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .hero p{max-width:520px;font-size:1.1rem;margin-top:14px}
+@media(max-width:760px){
+  .hero{min-height:0;display:block}
+  .hero img{height:74svh;bottom:auto;transform:none}
+  .hero:after{height:74svh;bottom:auto;background:linear-gradient(180deg,rgba(11,11,13,.7) 0%,rgba(11,11,13,0) 30%,rgba(11,11,13,0) 75%,var(--ink) 100%)}
+  .hero .inner{min-height:0;display:grid;grid-template-rows:calc(74svh - 80px) auto;padding:80px 24px 44px}
+  .hero p{margin-top:6px}
+}
 .cheer{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .btn{display:inline-block;border:0;cursor:pointer;background:var(--acid);color:var(--ink);font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;padding:14px 22px;border-radius:999px;text-decoration:none;user-select:none}
 .btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 2px var(--paper)}
@@ -67,6 +87,7 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .timeline{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 24px 30px;margin:0 -24px;scrollbar-width:thin}
 .stop{flex:0 0 min(78vw,340px);scroll-snap-align:start;background:#16161a;border-radius:18px;padding:26px;position:relative;border-top:4px solid var(--acid)}
 .stop .yr{font-family:Anton,sans-serif;font-size:3.2rem;color:var(--acid);line-height:1}
+.stop img{width:100%;height:170px;object-fit:cover;border-radius:10px;margin:14px 0 4px}
 .stop h3{font-size:1.15rem;margin:10px 0 8px}
 .stop p{color:#c9c6bf;font-size:.95rem}
 .stop.big{background:var(--blue)}
@@ -81,6 +102,7 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .members li{display:flex;justify-content:space-between;border-bottom:1px solid #2a2a30;padding:12px 0;font-weight:600;font-size:1.1rem}
 .members li em{font-style:normal;color:var(--muted);font-weight:400}
 @media(max-width:860px){.band{grid-template-columns:1fr}}
+@media(max-width:560px){.members li{display:block;font-size:1.05rem}.members li em{display:block;font-size:.9rem;margin-top:2px}}
 
 /* music */
 .releases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
@@ -93,9 +115,11 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .rel.open .story{max-height:320px;margin-top:10px}
 
 /* full bleed photo */
-.bleed{height:70vh;background:url(img/alhambra-bw.webp) center/cover fixed;display:flex;align-items:center;justify-content:center;text-align:center}
+.bleed{height:70vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.bleed .bg{position:absolute;left:0;right:0;top:-25%;height:150%;background:url(img/alhambra-bw.webp) center/cover;will-change:transform}
+.bleed h2{position:relative}
 .bleed h2{text-shadow:0 4px 30px rgba(0,0,0,.6)}
-@media(max-width:760px){.bleed{background-attachment:scroll}}
+
 
 /* gigs */
 .gigs{background:var(--paper);color:var(--ink)}
@@ -112,11 +136,13 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 
 /* merch */
 .shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
-.item{border-radius:18px;padding:30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.item{border-radius:18px;padding:26px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 .item.dray{background:var(--paper);color:var(--ink)}
 .item.merch{background:var(--blue)}
 .item.lyr{background:#16161a;border:2px solid #2a2a30}
 .item .display{font-size:3rem}
+.ph{aspect-ratio:4/3;border-radius:12px;margin:18px 0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;background:repeating-linear-gradient(45deg,rgba(0,0,0,.08) 0 14px,rgba(0,0,0,.02) 14px 28px);border:2px dashed currentColor;opacity:.7}
+.item.lyr img{border-radius:12px;margin:18px 0;aspect-ratio:4/3;object-fit:cover;object-position:top;width:100%;cursor:zoom-in;background:#fff}
 .tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:var(--acid);color:var(--ink)}
 
 /* video */
@@ -135,6 +161,7 @@ footer .display{font-size:3rem;color:var(--paper)}
 
 <nav>
   <a class="logo" href="#top">THE DRAYMIN</a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
   <ul>
     <li><a href="#story">Story</a></li>
     <li><a href="#press">Press</a></li>
@@ -172,17 +199,18 @@ footer .display{font-size:3rem;color:var(--paper)}
     <div class="kicker">The story</div>
     <h2 class="display reveal">From the shed<br>to the Alhambra</h2>
     <div class="timeline">
-      <div class="stop"><div class="yr">2004</div><img src="img/tl-shed.webp" alt="" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:10px;margin:14px 0 4px"><h3>The shed in Rosyth</h3><p>Brothers Fraser and Craig Penman, Gec Livingstone and Gaz Louch start a band in a soundproofed shed at the bottom of the Penman family garden. First gig: The Yard, Rosyth, in May 2005.</p></div>
-      <div class="stop"><div class="yr">2006</div><h3>Garden City</h3><p>The first EP, recorded in that garden hut. It gets them to Alan McGee's Death Disco at Notting Hill Arts Club and the Cavern Club in Liverpool.</p></div>
-      <div class="stop"><div class="yr">2006</div><h3>EMI, London</h3><p>Three tracks recorded at EMI's London studios. A sold-out London show supporting Louis XIV, and a tip as a band to watch in 2007.</p></div>
-      <div class="stop"><div class="yr">2007</div><h3>Austin, Texas</h3><p>South by Southwest, 14 to 18 March. From the shed to one of the world's biggest music festivals. Then T in the Park.</p></div>
-      <div class="stop"><div class="yr">2008</div><h3>The 'final' gig</h3><p>Fraser takes a job offshore. Around 1,000 people pack Alhambra 2 in Dunfermline to say goodbye. It doesn't stick.</p></div>
-      <div class="stop"><div class="yr">2009</div><h3>Back again</h3><p>A year later they're back, with the 2point1 EP and a big night at Velocity.</p></div>
-      <div class="stop"><div class="yr">2010</div><img src="img/tl-2010.webp" alt="" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:10px;margin:14px 0 4px"><h3>Five-piece</h3><p>Cal Nicol joins on keys. Heart Attack lands, and the band plays the T Break stage at T in the Park on Saturday 10 July.</p></div>
-      <div class="stop"><div class="yr">2012</div><h3>Should've Known Better</h3><p>The debut album, out 2 April 2012 on Townsend Records. It makes the Official Scottish Albums Chart.</p></div>
-      <div class="stop"><div class="yr">2013</div><img src="img/tl-2013.webp" alt="" loading="lazy" style="width:100%;height:170px;object-fit:cover;border-radius:10px;margin:14px 0 4px"><h3>Save the Pars</h3><p>After a year off, the band reunites for fundraising gigs at PJ Molloys to help save Dunfermline Athletic.</p></div>
-      <div class="stop"><div class="yr">2026</div><h3>Garden City, at last</h3><p>Twenty years after that first EP, Garden City finally gets a proper release on 18 September 2026.</p></div>
-      <div class="stop big"><div class="yr">2026</div><h3>Back at the Alhambra</h3><p>Saturday 3 October 2026. The first hometown show in 11 years. Sold out.</p></div>
+      <div class="stop"><div class="yr">2004</div><img src="img/tl-2004.webp" alt="The Draymin's soundproofed hut in Rosyth, 2004" loading="lazy"><h3>The shed in Rosyth</h3><p>Brothers Fraser and Craig Penman, Gec Livingstone and Gaz Louch start a band in a soundproofed shed at the bottom of the Penman family garden.</p></div>
+      <div class="stop"><div class="yr">2005</div><img src="img/tl-2005.webp" alt="The Draymin's first gig at The Yard, Rosyth, May 2005" loading="lazy"><h3>First gig</h3><p>The Yard, Rosyth, May 2005. The banner was homemade. The noise was not small.</p></div>
+      <div class="stop"><div class="yr">2006</div><img src="img/tl-gardencity06.webp" alt="Hitching with a Garden City sign" loading="lazy"><h3>Garden City</h3><p>The first EP, recorded in that garden hut. It gets them to Alan McGee's Death Disco at Notting Hill Arts Club and the Cavern Club in Liverpool.</p></div>
+      <div class="stop"><div class="yr">2006</div><img src="img/tl-emi.webp" alt="The Draymin recording at EMI in London" loading="lazy"><h3>EMI, London</h3><p>Three tracks recorded at EMI's London studios. A sold-out London show supporting Louis XIV, and a tip as a band to watch in 2007.</p></div>
+      <div class="stop"><div class="yr">2007</div><img src="img/tl-2007.webp" alt="The Draymin at T in the Park, 2007" loading="lazy"><h3>Austin, Texas</h3><p>South by Southwest, 14 to 18 March. From the shed to one of the world's biggest music festivals. Then T in the Park.</p></div>
+      <div class="stop"><div class="yr">2008</div><img src="img/tl-2008.webp" alt="The Draymin on stage at the Alhambra, 2008" loading="lazy"><h3>The 'final' gig</h3><p>Fraser takes a job offshore. Around 1,000 people pack Alhambra 2 in Dunfermline to say goodbye. It doesn't stick.</p></div>
+      <div class="stop"><div class="yr">2009</div><img src="img/tl-2009.webp" alt="The Draymin live at King Tut's, Glasgow" loading="lazy"><h3>Back again</h3><p>A year later they're back, with the 2point1 EP and a big night at Velocity.</p></div>
+      <div class="stop"><div class="yr">2010</div><img src="img/tl-2010b.webp" alt="T Break stage poster, T in the Park 2010" loading="lazy" style="object-fit:contain;background:#0b0b0d"><h3>Five-piece</h3><p>Cal Nicol joins on keys. Heart Attack lands, and the band plays the T Break stage at T in the Park on Saturday 10 July.</p></div>
+      <div class="stop"><div class="yr">2012</div><img src="img/cover-skb.webp" alt="Should've Known Better cover art" loading="lazy"><h3>Should've Known Better</h3><p>The debut album, out 2 April 2012 on Townsend Records. It makes the Official Scottish Albums Chart.</p></div>
+      <div class="stop"><div class="yr">2013</div><img src="img/tl-2013.webp" alt="Save the Pars fundraising gigs" loading="lazy"><h3>Save the Pars</h3><p>After a year off, the band reunites for fundraising gigs at PJ Molloys to help save Dunfermline Athletic.</p></div>
+      <div class="stop"><div class="yr">2026</div><img src="img/cover-gardencity.webp" alt="Garden City cover art" loading="lazy"><h3>Garden City, at last</h3><p>Twenty years after that first EP, Garden City finally gets a proper release on 18 September 2026.</p></div>
+      <div class="stop big"><div class="yr">2026</div><img src="img/alhambra-back.webp" alt="The Draymin on stage at the Alhambra, 2026" loading="lazy"><h3>Back at the Alhambra</h3><p>Saturday 3 October 2026. The first hometown show in 11 years. Sold out.</p></div>
     </div>
     <div class="hint">Swipe or scroll sideways</div>
   </div>
@@ -192,20 +220,30 @@ footer .display{font-size:3rem;color:var(--paper)}
   <div class="wrap">
     <div class="kicker">Press</div>
     <h2 class="display reveal">Hold the front page</h2>
-    <p class="hint">Twenty years of press cuttings. Drag them about. Tap one to read it.</p>
+    <p class="hint">Twenty years of press cuttings in one pile. Drag them about. Tap one to read it.</p>
     <div class="board" id="board">
-      <figure class="cut" style="--r:-6deg" data-full="img/press/p132.webp" data-cap="We're Draymin of the big time"><img src="img/press/p132-t.webp" alt="Press cutting: We're Draymin of the big time" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:4deg" data-full="img/press/p66.webp" data-cap="Draymin of big time &middot; 2006"><img src="img/press/p66-t.webp" alt="Press cutting: Draymin of big time" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:-3deg" data-full="img/press/p63.webp" data-cap="Sadie Frost in the crowd &middot; 2006"><img src="img/press/p63-t.webp" alt="Press cutting: Sadie Frost in the crowd" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:7deg" data-full="img/press/p89.webp" data-cap="From garden shed to international festival &middot; 2007"><img src="img/press/p89-t.webp" alt="Press cutting: From garden shed to international festival" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:-8deg" data-full="img/press/p5.webp" data-cap="Soundcheck: Rise Up &middot; 2007"><img src="img/press/p5-t.webp" alt="Press cutting: Soundcheck: Rise Up" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:3deg" data-full="img/press/p8.webp" data-cap="Dray're muddy brilliant &middot; T in the Park"><img src="img/press/p8-t.webp" alt="Press cutting: Dray're muddy brilliant" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:-4deg" data-full="img/press/p110.webp" data-cap="The Draymin bid farewell with great gig &middot; 2008"><img src="img/press/p110-t.webp" alt="Press cutting: The Draymin bid farewell with great gig" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:6deg" data-full="img/press/p53.webp" data-cap="A year after their 'final' gig, Draymin return &middot; 2009"><img src="img/press/p53-t.webp" alt="Press cutting: A year after their 'final' gig, Draymin return" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:-2deg" data-full="img/press/p0.webp" data-cap="It's their lucky Dray &middot; 2010"><img src="img/press/p0-t.webp" alt="Press cutting: It's their lucky Dray" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:5deg" data-full="img/press/p165.webp" data-cap="Single: Heart Attack &middot; 2010"><img src="img/press/p165-t.webp" alt="Press cutting: Single: Heart Attack" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:-7deg" data-full="img/press/p69.webp" data-cap="Reborn Draymin back home and ready for T &middot; 2010"><img src="img/press/p69-t.webp" alt="Press cutting: Reborn Draymin back home and ready for T" loading="lazy" draggable="false"></figure>
-      <figure class="cut" style="--r:2deg" data-full="img/press/p29.webp" data-cap="The Draymin reunite for Pars &middot; Dunfermline Press, April 2013"><img src="img/press/p29-t.webp" alt="Press cutting: The Draymin reunite for Pars" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:5deg" data-full="img/press/p89.webp" data-cap="From garden shed to international festival &middot; 2007"><img src="img/press/p89-t.webp" alt="Press cutting: From garden shed to international festival" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-5deg" data-full="img/press/p86.webp" data-cap="Scots bands given arts funding for trip to Texas &middot; 2007"><img src="img/press/p86-t.webp" alt="Press cutting: Scots bands given arts funding for trip to Texas" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p63.webp" data-cap="Sadie Frost in the crowd &middot; 2006"><img src="img/press/p63-t.webp" alt="Press cutting: Sadie Frost in the crowd" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-9deg" data-full="img/press/p66.webp" data-cap="Draymin of big time &middot; 2006"><img src="img/press/p66-t.webp" alt="Press cutting: Draymin of big time" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p132.webp" data-cap="We're Draymin of the big time"><img src="img/press/p132-t.webp" alt="Press cutting: We're Draymin of the big time" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p5.webp" data-cap="Soundcheck: Rise Up &middot; 2007"><img src="img/press/p5-t.webp" alt="Press cutting: Soundcheck: Rise Up" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:5deg" data-full="img/press/p8.webp" data-cap="Dray're muddy brilliant &middot; T in the Park"><img src="img/press/p8-t.webp" alt="Press cutting: Dray're muddy brilliant" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-9deg" data-full="img/press/p77.webp" data-cap="We're ready for the top"><img src="img/press/p77-t.webp" alt="Press cutting: We're ready for the top" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-3deg" data-full="img/press/p68.webp" data-cap="Rosyth band to support Britpop stars at Velocity"><img src="img/press/p68-t.webp" alt="Press cutting: Rosyth band to support Britpop stars at Velocity" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p153.webp" data-cap="Rosyth band set for Glasgow gig &middot; King Tut's"><img src="img/press/p153-t.webp" alt="Press cutting: Rosyth band set for Glasgow gig" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p110.webp" data-cap="The Draymin bid farewell with great gig &middot; 2008"><img src="img/press/p110-t.webp" alt="Press cutting: The Draymin bid farewell with great gig" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p38.webp" data-cap="Bidding The Draymin a festive farewell"><img src="img/press/p38-t.webp" alt="Press cutting: Bidding The Draymin a festive farewell" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p56.webp" data-cap="Dreaming of a Draymin return"><img src="img/press/p56-t.webp" alt="Press cutting: Dreaming of a Draymin return" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-3deg" data-full="img/press/p53.webp" data-cap="A year after their 'final' gig, Draymin return &middot; 2009"><img src="img/press/p53-t.webp" alt="Press cutting: A year after their 'final' gig, Draymin return" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p0.webp" data-cap="It's their lucky Dray &middot; 2010"><img src="img/press/p0-t.webp" alt="Press cutting: It's their lucky Dray" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p165.webp" data-cap="Single: Heart Attack &middot; 2010"><img src="img/press/p165-t.webp" alt="Press cutting: Single: Heart Attack" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-9deg" data-full="img/press/p69.webp" data-cap="Reborn Draymin back home and ready for T &middot; 2010"><img src="img/press/p69-t.webp" alt="Press cutting: Reborn Draymin back home and ready for T" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/pn146.webp" data-cap="A blistering comeback &middot; Sunday Mail, 2009"><img src="img/press/pn146-t.webp" alt="Press cutting: A blistering comeback" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-3deg" data-full="img/press/pn25.webp" data-cap="One of the best bands I've heard for years"><img src="img/press/pn25-t.webp" alt="Press cutting: One of the best bands I've heard for years" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-9deg" data-full="img/press/p26.webp" data-cap="Prepare to Oxjam!"><img src="img/press/p26-t.webp" alt="Press cutting: Prepare to Oxjam!" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p23.webp" data-cap="Big deal"><img src="img/press/p23-t.webp" alt="Press cutting: Big deal" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-9deg" data-full="img/press/p29.webp" data-cap="The Draymin reunite for Pars &middot; Dunfermline Press, April 2013"><img src="img/press/p29-t.webp" alt="Press cutting: The Draymin reunite for Pars" loading="lazy" draggable="false"></figure>
     </div>
   </div>
 </section>
@@ -227,7 +265,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   </div>
 </section>
 
-<div class="bleed"><h2 class="display">Should've<br>known better</h2></div>
+<div class="bleed"><div class="bg" id="bleedBg"></div><h2 class="display">Should've<br>known better</h2></div>
 
 <section id="music">
   <div class="wrap">
@@ -237,7 +275,7 @@ footer .display{font-size:3rem;color:var(--paper)}
       <div class="rel" tabindex="0">
         <img class="cover" src="img/cover-gardencity.webp" alt="Garden City cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
         <div class="meta"><strong>Garden City</strong><br><small>Single, 2026. Tap for the story.</small>
-          <div class="story">[Placeholder: the story behind Garden City.]<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+          <div class="story">Recorded in 2006 in the soundproofed shed at the bottom of the Penman garden. It got the band to Death Disco in London and the Cavern Club in Liverpool. Twenty years on, it finally got a proper release on 18 September 2026.<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
       </div>
       <div class="rel" tabindex="0">
         <img class="cover" src="img/cover-selftitled.webp" alt="The Draymin cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
@@ -252,7 +290,7 @@ footer .display{font-size:3rem;color:var(--paper)}
       <div class="rel" tabindex="0">
         <img class="cover" src="img/cover-skb.webp" alt="Should've Known Better cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
         <div class="meta"><strong>Should've Known Better</strong><br><small>Album, 2012, Townsend Records. Tap for the story.</small>
-          <div class="story">[Placeholder: the story behind the debut album and a favourite track.]<br><br><a class="btn" href="https://open.spotify.com/album/4u0C2OYZU7bjaaCfxcjPdZ" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+          <div class="story">The debut album, out 2 April 2012 on Townsend Records. It made the Official Scottish Albums Chart.<br><br><a class="btn" href="https://open.spotify.com/album/4u0C2OYZU7bjaaCfxcjPdZ" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
       </div>
     </div>
   </div>
@@ -286,9 +324,9 @@ footer .display{font-size:3rem;color:var(--paper)}
     <div class="kicker">Merch</div>
     <h2 class="display reveal">Wear it</h2>
     <div class="shop">
-      <div class="item dray"><span class="tag">Coming soon</span><div><div class="display">DRAY</div><p>Fraser's clothing label. [Placeholder: products, photos, prices.]</p></div></div>
-      <div class="item merch"><span class="tag">Coming soon</span><div><div class="display">The Draymin</div><p>Proper band merch. [Placeholder: tees, posters and more.]</p></div></div>
-      <div class="item lyr"><span class="tag">Coming soon</span><div><div class="display">Lyrics</div><p>Every word, plus the stories behind them.</p></div></div>
+      <div class="item dray"><span class="tag">Coming soon</span><div class="ph">Photo coming soon</div><div><div class="display">DRAY</div><p>Fraser's clothing label. [Placeholder: products, photos, prices.]</p></div></div>
+      <div class="item merch"><span class="tag">Coming soon</span><div class="ph">Photo coming soon</div><div><div class="display">The Draymin</div><p>Proper band merch. [Placeholder: tees, posters and more.]</p></div></div>
+      <div class="item lyr"><span class="tag">Coming soon</span><img id="lyricImg" src="img/lyrics-tenpast.webp" data-full="img/lyrics-tenpast-full.webp" data-cap="Ten Past Eleven, handwritten" alt="Handwritten lyrics for Ten Past Eleven" loading="lazy"><div><div class="display">Lyrics</div><p>Every word, plus the stories behind them. Starting with the original Ten Past Eleven sheet. Tap to read it.</p></div></div>
     </div>
   </div>
 </section>
@@ -297,7 +335,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   <div class="wrap">
     <div class="kicker">Video</div>
     <h2 class="display reveal">Watch it</h2>
-    <div style="position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000"><iframe src="https://drive.google.com/file/d/1ofrM2N7y4vsxCLoQlVx6z_Y4XN0Dx0HS/preview" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0" title="The Draymin live at the Alhambra, Dunfermline"></iframe></div>
+    <video src="media/alhambra-25s.mp4" poster="media/poster.jpg" controls playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:18px;background:#000;display:block" title="The Draymin live at the Alhambra, Dunfermline"></video>
     <p class="hint" style="margin-top:14px">Live at the Alhambra, October 2026. The full vlog is on its way.</p>
   </div>
 </section>
@@ -312,25 +350,35 @@ footer .display{font-size:3rem;color:var(--paper)}
 <script>
 // hero parallax
 const hero=document.getElementById('heroImg');
-addEventListener('scroll',()=>{hero.style.transform=`scale(1.08) translateY(${scrollY*0.25}px)`},{passive:true});
+const mob=matchMedia('(max-width:760px)'),bleed=document.getElementById('bleedBg');
+addEventListener('scroll',()=>{if(!mob.matches)hero.style.transform=`scale(1.08) translateY(${scrollY*0.25}px)`;
+  const b=bleed.parentElement.getBoundingClientRect();if(b.bottom>0&&b.top<innerHeight){bleed.style.transform=`translateY(${(b.top+b.height/2-innerHeight/2)*-0.3}px)`}},{passive:true});
+
+// hamburger
+const nav=document.querySelector('nav'),burger=document.getElementById('burger');
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+nav.querySelectorAll('ul a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
 
 // make some noise
 const btn=document.getElementById('noise'),lvl=document.getElementById('level'),lab=document.getElementById('levelLabel'),word=document.getElementById('wordmark');
 word.innerHTML=[...word.textContent].map(c=>c===' '?' ':`<span>${c}</span>`).join('');
 const letters=word.querySelectorAll('span');
 let v=0,holding=false;
+const song=new Audio('media/noise.mp3');song.loop=true;song.preload='auto';let actx,gain;
+function startSong(){if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();gain=actx.createGain();gain.gain.value=0;actx.createMediaElementSource(song).connect(gain).connect(actx.destination)}actx.resume();if(song.paused)song.play().catch(()=>{})}
 const labels=['The Alhambra is waiting','Getting there','Louder','That is a Fife crowd','ONE MORE TUNE'];
 function tick(){
   v=holding?Math.min(100,v+2.2):Math.max(0,v-1.4);
   lvl.style.width=v+'%';
+  if(gain){gain.gain.value=Math.pow(v/100,1.5);if(v===0&&!song.paused)song.pause()}
   lab.textContent=labels[Math.min(4,Math.floor(v/20))];
   letters.forEach((s,i)=>{s.style.transform=holding?`translateY(${Math.sin(Date.now()/90+i)*v/9}px)`:'none'});
   requestAnimationFrame(tick);
 }
 tick();
-['mousedown','touchstart'].forEach(e=>btn.addEventListener(e,ev=>{ev.preventDefault();holding=true},{passive:false}));
+['mousedown','touchstart'].forEach(e=>btn.addEventListener(e,ev=>{ev.preventDefault();holding=true;startSong()},{passive:false}));
 ['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>btn.addEventListener(e,()=>holding=false));
-btn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();holding=true}});
+btn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();holding=true;startSong()}});
 btn.addEventListener('keyup',()=>holding=false);
 
 // release flip
@@ -340,12 +388,20 @@ document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('op
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// press board: drag + lightbox
-(()=>{const lb=document.getElementById('lightbox'),li=lb.querySelector('img'),lp=lb.querySelector('p');
-document.querySelectorAll('.cut').forEach(c=>{let sx,sy,ox=0,oy=0,moved=false;
-c.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;moved=false;c.setPointerCapture(e.pointerId);c.classList.add('drag')});
-c.addEventListener('pointermove',e=>{if(!c.classList.contains('drag'))return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;c.style.setProperty('--x',(ox+dx)+'px');c.style.setProperty('--y',(oy+dy)+'px')});
-c.addEventListener('pointerup',e=>{c.classList.remove('drag');ox+=e.clientX-sx;oy+=e.clientY-sy;if(!moved){ox-=e.clientX-sx;oy-=e.clientY-sy;c.style.setProperty('--x',ox+'px');c.style.setProperty('--y',oy+'px');li.src=c.dataset.full;lp.innerHTML=c.dataset.cap;lb.classList.add('on')}})});
+// press board: scattered pile, drag, lightbox
+(()=>{const lb=document.getElementById('lightbox'),li=lb.querySelector('img'),lp=lb.querySelector('p'),board=document.getElementById('board');
+const open=(src,cap)=>{li.src=src;lp.innerHTML=cap;lb.classList.add('on')};
+let z=1,seed=11;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+const cuts=[...document.querySelectorAll('.cut')];
+function place(){const W=board.clientWidth,H=board.clientHeight;cuts.forEach(c=>{const w=c.offsetWidth||160,h=c.offsetHeight||180;c.style.left=Math.max(0,rnd()*(W-w))+'px';c.style.top=Math.max(0,rnd()*(H-h))+'px'})}
+cuts.forEach(c=>{c.style.zIndex=z++;const im=c.querySelector('img');if(!im.complete)im.addEventListener('load',()=>{if(!placed)place()})});
+let placed=false;addEventListener('load',()=>{seed=11;place();placed=true});place();
+cuts.forEach(c=>{let sx,sy,ox=0,oy=0,moved=false,down=false;
+c.addEventListener('pointerdown',e=>{down=true;sx=e.clientX;sy=e.clientY;moved=false;c.setPointerCapture(e.pointerId);c.classList.add('drag');c.style.zIndex=++z});
+c.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;c.style.setProperty('--x',(ox+dx)+'px');c.style.setProperty('--y',(oy+dy)+'px')});
+const end=e=>{if(!down)return;down=false;c.classList.remove('drag');if(moved){ox+=e.clientX-sx;oy+=e.clientY-sy}else{c.style.setProperty('--x',ox+'px');c.style.setProperty('--y',oy+'px');open(c.dataset.full,c.dataset.cap)}};
+c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end)});
+const ly=document.getElementById('lyricImg');ly.addEventListener('click',()=>open(ly.dataset.full,ly.dataset.cap));
 lb.addEventListener('click',()=>lb.classList.remove('on'));addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')})})();
 </script>
 </body>
