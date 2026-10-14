@@ -34,7 +34,7 @@ nav.open .burger i:nth-child(2){opacity:0}
 nav.open .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
 @media(max-width:760px){
   .burger{display:block}
-  nav ul{position:fixed;inset:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:26px;font-family:Anton,sans-serif;font-size:2.6rem;letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .3s}
+  nav ul{position:fixed;inset:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:84px 0 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:Anton,sans-serif;font-size:1.9rem;line-height:1.25;letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .3s}
   nav.open ul{opacity:1;pointer-events:auto}
   nav ul a:hover{color:var(--acid)}
 }
@@ -163,12 +163,12 @@ footer .display{font-size:3rem;color:var(--paper)}
   <a class="logo" href="#top">THE DRAYMIN</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
   <ul>
+    <li><a href="#video">Video</a></li>
     <li><a href="#story">Story</a></li>
     <li><a href="#press">Press</a></li>
     <li><a href="#music">Music</a></li>
     <li><a href="#gigs">Gigs</a></li>
     <li><a href="#fanmap">Fan Map</a></li>
-    <li><a href="#video">Video</a></li>
     <li><a href="#merch">Merch</a></li>
     <li><a href="#lyrics">Lyrics</a></li>
   </ul>
@@ -195,6 +195,15 @@ footer .display{font-size:3rem;color:var(--paper)}
 </header>
 
 <div class="marquee"><div>Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; </div></div>
+
+<section id="video" style="padding-bottom:20px">
+  <div class="wrap">
+    <div class="kicker">Video</div>
+    <h2 class="display reveal">Watch it</h2>
+    <video src="media/alhambra-25s.mp4" poster="media/poster.jpg" controls playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:18px;background:#000;display:block" title="The Draymin live at the Alhambra, Dunfermline"></video>
+    <p class="hint" style="margin-top:14px">Live at the Alhambra, October 2026. The full vlog is on its way.</p>
+  </div>
+</section>
 
 <section id="story" style="padding-bottom:40px">
   <div class="wrap">
@@ -321,15 +330,6 @@ footer .display{font-size:3rem;color:var(--paper)}
   </div>
 </section>
 
-<section id="video">
-  <div class="wrap">
-    <div class="kicker">Video</div>
-    <h2 class="display reveal">Watch it</h2>
-    <video src="media/alhambra-25s.mp4" poster="media/poster.jpg" controls playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:18px;background:#000;display:block" title="The Draymin live at the Alhambra, Dunfermline"></video>
-    <p class="hint" style="margin-top:14px">Live at the Alhambra, October 2026. The full vlog is on its way.</p>
-  </div>
-</section>
-
 <section id="merch">
   <div class="wrap">
     <div class="kicker">Merch</div>
@@ -366,20 +366,27 @@ const btn=document.getElementById('noise'),lvl=document.getElementById('level'),
 word.innerHTML=[...word.textContent].map(c=>c===' '?' ':`<span>${c}</span>`).join('');
 const letters=word.querySelectorAll('span');
 let v=0,holding=false;
-const song=new Audio('media/intro-snippet.mp3');song.loop=true;song.preload='auto';let actx,gain;
-function startSong(){if(!actx){actx=new (window.AudioContext||window.webkitAudioContext)();gain=actx.createGain();gain.gain.value=0;actx.createMediaElementSource(song).connect(gain).connect(actx.destination)}actx.resume();if(song.paused)song.play().catch(()=>{})}
+const AC=window.AudioContext||window.webkitAudioContext;let actx=null,gain=null,buf=null,src=null;
+try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+function ensureCtx(){if(!actx){actx=new AC();gain=actx.createGain();gain.gain.value=0;gain.connect(actx.destination);
+  fetch('media/intro-snippet.mp3').then(r=>r.arrayBuffer()).then(a=>new Promise((ok,no)=>actx.decodeAudioData(a,ok,no))).then(b=>{buf=b;if(holding)startSong()}).catch(()=>{})}
+  if(actx.state!=='running')actx.resume().catch(()=>{});
+  const o=actx.createBufferSource();o.buffer=actx.createBuffer(1,1,22050);o.connect(actx.destination);o.start(0)}
+function startSong(){ensureCtx();if(buf&&!src){src=actx.createBufferSource();src.buffer=buf;src.loop=true;src.connect(gain);src.start(0)}}
+function stopSong(){if(src){try{src.stop()}catch(e){}src.disconnect();src=null}}
+['touchend','click','keydown'].forEach(e=>document.addEventListener(e,ensureCtx,{passive:true}));
 const labels=['The Alhambra is waiting','Getting there','Louder','That is a Fife crowd','ONE MORE TUNE'];
 function tick(){
   v=holding?Math.min(100,v+2.2):Math.max(0,v-1.4);
   lvl.style.width=v+'%';
-  if(gain){gain.gain.value=Math.pow(v/100,1.5);if(v===0&&!song.paused)song.pause()}
+  if(gain){gain.gain.value=Math.pow(v/100,1.2);if(v===0&&!holding)stopSong()}
   lab.textContent=labels[Math.min(4,Math.floor(v/20))];
   letters.forEach((s,i)=>{s.style.transform=holding?`translateY(${Math.sin(Date.now()/90+i)*v/9}px)`:'none'});
   requestAnimationFrame(tick);
 }
 tick();
 ['mousedown','touchstart'].forEach(e=>btn.addEventListener(e,ev=>{ev.preventDefault();holding=true;startSong()},{passive:false}));
-['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>btn.addEventListener(e,()=>holding=false));
+['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>btn.addEventListener(e,()=>{holding=false;ensureCtx()}));
 btn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();holding=true;startSong()}});
 btn.addEventListener('keyup',()=>holding=false);
 
