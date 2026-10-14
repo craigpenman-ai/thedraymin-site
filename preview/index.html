@@ -28,11 +28,11 @@ nav ul a{text-decoration:none}
 @media(max-width:760px){nav ul{display:none}}
 
 /* hero */
-.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;overflow:hidden}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform .2s linear}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.15) 30%,rgba(11,11,13,.95))}
-.hero .inner{position:relative;z-index:2;padding:0 24px 64px;width:100%;max-width:1180px;margin:0 auto}
-.hero h1{font-size:clamp(4.2rem,15vw,13rem)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.75) 0%,rgba(11,11,13,.1) 35%,rgba(11,11,13,.1) 60%,rgba(11,11,13,.9) 100%)}
+.hero .inner{position:relative;z-index:2;padding:96px 24px 56px;width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
+.hero h1{font-size:clamp(4rem,12vw,10.5rem)}
 .hero h1 span{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .hero p{max-width:520px;font-size:1.1rem;margin-top:14px}
 .cheer{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
@@ -136,8 +136,11 @@ footer .display{font-size:3rem;color:var(--paper)}
 <header class="hero" id="top">
   <img id="heroImg" src="img/alhambra-crowd.webp" alt="The Draymin on stage at the Alhambra Theatre, Dunfermline, with a full crowd behind them">
   <div class="inner">
+    <div>
     <div class="kicker">Rosyth. Dunfermline. Fife.</div>
     <h1 class="display" id="wordmark">The Draymin</h1>
+    </div>
+    <div>
     <p>Indie dance from the Kingdom of Fife. 1,700 people at the Alhambra said it was time to come back. So we did.</p>
     <div class="cheer">
       <button class="btn" id="noise">Hold to make some noise</button>
@@ -145,6 +148,7 @@ footer .display{font-size:3rem;color:var(--paper)}
         <div class="meter"><i id="level"></i></div>
         <div class="meter-label" id="levelLabel">The Alhambra is waiting</div>
       </div>
+    </div>
     </div>
   </div>
 </header>
