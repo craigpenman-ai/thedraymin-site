@@ -27,12 +27,23 @@ nav ul{list-style:none;display:flex;gap:22px;font-weight:600;font-size:.85rem;te
 nav ul a{text-decoration:none}
 @media(max-width:760px){nav ul{display:none}}
 
+/* press */
+.board{position:relative;display:flex;flex-wrap:wrap;gap:28px;justify-content:center;padding:30px 0;touch-action:pan-y}
+.cut{margin:0;background:#f4efe3;padding:8px;box-shadow:0 14px 30px rgba(0,0,0,.45);transform:translate(var(--x,0),var(--y,0)) rotate(var(--r));cursor:grab;transition:box-shadow .2s;position:relative;user-select:none}
+.cut:before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:22px;margin-left:-35px;background:rgba(220,255,60,.75);transform:rotate(-3deg)}
+.cut img{display:block;max-width:220px;max-height:260px;width:auto;height:auto;pointer-events:none}
+.cut:hover{box-shadow:0 22px 44px rgba(0,0,0,.6);z-index:5}
+.cut.drag{cursor:grabbing;z-index:9;box-shadow:0 30px 60px rgba(0,0,0,.7)}
+#lightbox{position:fixed;inset:0;background:rgba(11,11,13,.92);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:100;padding:24px;cursor:zoom-out}
+#lightbox.on{display:flex}
+#lightbox img{max-width:min(92vw,1000px);max-height:80vh;box-shadow:0 20px 60px #000}
+#lightbox p{margin-top:16px;font-weight:700;letter-spacing:.04em}
 /* hero */
 .hero{position:relative;min-height:100vh;display:flex;overflow:hidden}
 .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform .2s linear}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.75) 0%,rgba(11,11,13,.1) 35%,rgba(11,11,13,.1) 60%,rgba(11,11,13,.9) 100%)}
-.hero .inner{position:relative;z-index:2;padding:96px 24px 56px;width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
-.hero h1{font-size:clamp(4rem,12vw,10.5rem)}
+.hero .inner{position:relative;z-index:2;padding:72px 24px 48px;width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
+.hero h1{font-size:clamp(3.4rem,9vw,8rem);line-height:.9}
 .hero h1 span{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .hero p{max-width:520px;font-size:1.1rem;margin-top:14px}
 .cheer{margin-top:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
@@ -126,6 +137,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   <a class="logo" href="#top">THE DRAYMIN</a>
   <ul>
     <li><a href="#story">Story</a></li>
+    <li><a href="#press">Press</a></li>
     <li><a href="#music">Music</a></li>
     <li><a href="#gigs">Gigs</a></li>
     <li><a href="#merch">Merch</a></li>
@@ -153,7 +165,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   </div>
 </header>
 
-<div class="marquee"><div>Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Scotland's best kept secret &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Rosyth to Austin and back &nbsp;&bull;&nbsp; Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Scotland's best kept secret &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Rosyth to Austin and back &nbsp;&bull;&nbsp; </div></div>
+<div class="marquee"><div>Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Announcement incoming &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Something big is coming &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; </div></div>
 
 <section id="story">
   <div class="wrap">
@@ -175,6 +187,29 @@ footer .display{font-size:3rem;color:var(--paper)}
     <div class="hint">Swipe or scroll sideways</div>
   </div>
 </section>
+
+<section id="press">
+  <div class="wrap">
+    <div class="kicker">Press</div>
+    <h2 class="display reveal">Hold the front page</h2>
+    <p class="hint">Twenty years of press cuttings. Drag them about. Tap one to read it.</p>
+    <div class="board" id="board">
+      <figure class="cut" style="--r:-6deg" data-full="img/press/p132.webp" data-cap="We're Draymin of the big time"><img src="img/press/p132-t.webp" alt="Press cutting: We're Draymin of the big time" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:4deg" data-full="img/press/p66.webp" data-cap="Draymin of big time &middot; 2006"><img src="img/press/p66-t.webp" alt="Press cutting: Draymin of big time" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-3deg" data-full="img/press/p63.webp" data-cap="Sadie Frost in the crowd &middot; 2006"><img src="img/press/p63-t.webp" alt="Press cutting: Sadie Frost in the crowd" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:7deg" data-full="img/press/p89.webp" data-cap="From garden shed to international festival &middot; 2007"><img src="img/press/p89-t.webp" alt="Press cutting: From garden shed to international festival" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-8deg" data-full="img/press/p5.webp" data-cap="Soundcheck: Rise Up &middot; 2007"><img src="img/press/p5-t.webp" alt="Press cutting: Soundcheck: Rise Up" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:3deg" data-full="img/press/p8.webp" data-cap="Dray're muddy brilliant &middot; T in the Park"><img src="img/press/p8-t.webp" alt="Press cutting: Dray're muddy brilliant" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-4deg" data-full="img/press/p110.webp" data-cap="The Draymin bid farewell with great gig &middot; 2008"><img src="img/press/p110-t.webp" alt="Press cutting: The Draymin bid farewell with great gig" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:6deg" data-full="img/press/p53.webp" data-cap="A year after their 'final' gig, Draymin return &middot; 2009"><img src="img/press/p53-t.webp" alt="Press cutting: A year after their 'final' gig, Draymin return" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-2deg" data-full="img/press/p0.webp" data-cap="It's their lucky Dray &middot; 2010"><img src="img/press/p0-t.webp" alt="Press cutting: It's their lucky Dray" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:5deg" data-full="img/press/p165.webp" data-cap="Single: Heart Attack &middot; 2010"><img src="img/press/p165-t.webp" alt="Press cutting: Single: Heart Attack" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:-7deg" data-full="img/press/p69.webp" data-cap="Reborn Draymin back home and ready for T &middot; 2010"><img src="img/press/p69-t.webp" alt="Press cutting: Reborn Draymin back home and ready for T" loading="lazy" draggable="false"></figure>
+      <figure class="cut" style="--r:2deg" data-full="img/press/p29.webp" data-cap="The Draymin reunite for Pars &middot; Dunfermline Press, April 2013"><img src="img/press/p29-t.webp" alt="Press cutting: The Draymin reunite for Pars" loading="lazy" draggable="false"></figure>
+    </div>
+  </div>
+</section>
+<div id="lightbox"><img alt=""><p></p></div>
 
 <section style="padding-top:0">
   <div class="wrap band">
@@ -304,6 +339,14 @@ document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('op
 // reveal on scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// press board: drag + lightbox
+(()=>{const lb=document.getElementById('lightbox'),li=lb.querySelector('img'),lp=lb.querySelector('p');
+document.querySelectorAll('.cut').forEach(c=>{let sx,sy,ox=0,oy=0,moved=false;
+c.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;moved=false;c.setPointerCapture(e.pointerId);c.classList.add('drag')});
+c.addEventListener('pointermove',e=>{if(!c.classList.contains('drag'))return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;c.style.setProperty('--x',(ox+dx)+'px');c.style.setProperty('--y',(oy+dy)+'px')});
+c.addEventListener('pointerup',e=>{c.classList.remove('drag');ox+=e.clientX-sx;oy+=e.clientY-sy;if(!moved){ox-=e.clientX-sx;oy-=e.clientY-sy;c.style.setProperty('--x',ox+'px');c.style.setProperty('--y',oy+'px');li.src=c.dataset.full;lp.innerHTML=c.dataset.cap;lb.classList.add('on')}})});
+lb.addEventListener('click',()=>lb.classList.remove('on'));addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')})})();
 </script>
 </body>
 </html>
