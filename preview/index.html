@@ -33,12 +33,11 @@ nav.open{mix-blend-mode:normal}
 nav.open .burger i:nth-child(1){transform:translateY(9px) rotate(45deg)}
 nav.open .burger i:nth-child(2){opacity:0}
 nav.open .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
-@media(max-width:760px){
-  .burger{display:block}
-  nav ul{position:fixed;inset:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:84px 0 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:Anton,sans-serif;font-size:1.9rem;line-height:1.25;letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .3s}
-  nav.open ul{opacity:1;pointer-events:auto}
-  nav ul a:hover{color:var(--acid)}
-}
+.burger{display:block}
+nav ul{position:fixed;inset:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:84px 0 40px;overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:Anton,sans-serif;font-size:1.9rem;line-height:1.25;letter-spacing:.04em;opacity:0;pointer-events:none;transition:opacity .3s}
+nav.open ul{opacity:1;pointer-events:auto}
+nav ul a:hover{color:var(--acid)}
+@media(min-width:761px){nav ul{font-size:2.6rem;gap:4px;padding-top:110px}}
 
 /* press */
 .board{position:relative;height:780px;margin-top:30px}
@@ -136,6 +135,63 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .wyt img{border-radius:18px}
 @media(max-width:860px){.wyt{grid-template-columns:1fr}}
 
+/* fan map */
+.fan{background:#101014}
+.comp{margin:30px 0;display:flex;gap:20px;align-items:center;background:var(--acid);color:var(--ink);border-radius:18px;padding:22px 26px}
+.comp .display{font-size:clamp(1.6rem,4vw,2.4rem)}
+.comp p{margin:6px 0 0;font-weight:600}
+.comp-badge{flex:none;width:74px;height:74px;border-radius:50%;background:var(--ink);color:var(--acid);display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:1.5rem;transform:rotate(-12deg);animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(8deg) scale(1.06)}}
+.draftnote{font-weight:400;font-size:.8rem;opacity:.7}
+.fanmap-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
+@media(max-width:860px){.fanmap-grid{grid-template-columns:1fr}}
+.mapbox{position:relative;border-radius:18px;overflow:hidden;border:1px solid #26262c}
+#gigmap{height:520px;background:#0b0b0d}
+@media(max-width:560px){#gigmap{height:400px}}
+.mapctl{position:absolute;left:12px;right:12px;bottom:12px;z-index:500;display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:rgba(11,11,13,.85);color:var(--paper);border:1px solid #3a3a42;border-radius:999px;padding:8px 14px;font:600 .8rem Inter,sans-serif;cursor:pointer}
+.chip:hover,#tourBtn{border-color:var(--acid)}
+#tourBtn{background:var(--acid);color:var(--ink)}
+.pin span{display:block;width:16px;height:16px;margin:3px;border-radius:50%;background:var(--blue);border:2px solid var(--paper);box-shadow:0 0 0 6px rgba(79,124,255,.25);animation:pulse 2.4s infinite}
+.pin.big span{background:var(--acid);box-shadow:0 0 0 8px rgba(215,255,58,.3)}
+.pin.home span{background:var(--paper);border-color:var(--acid)}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(79,124,255,0)}}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--ink);color:var(--paper);border-radius:14px}
+.leaflet-popup-content{margin:14px 16px;font-family:Inter,sans-serif}
+.leaflet-popup-content p{margin:6px 0 10px;font-size:.88rem;color:#c9c6bf}
+.leaflet-container a.leaflet-popup-close-button{color:var(--paper)}
+.pop-y{color:var(--acid);font-weight:800;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase}
+.pop-v{font-family:Anton,sans-serif;font-size:1.25rem;text-transform:uppercase;line-height:1.1;margin-top:3px}
+.pop-t{font-size:.8rem;color:var(--muted)}
+.pop-l{color:var(--acid)!important;font-size:.8rem;margin-left:6px}
+.wt{background:transparent;color:var(--paper);border:1px solid var(--paper);border-radius:999px;padding:6px 12px;font:600 .75rem Inter,sans-serif;cursor:pointer;transition:all .2s;white-space:nowrap}
+.wt.on{background:var(--acid);color:var(--ink);border-color:var(--acid)}
+.wt.pop{transform:scale(1.15)}
+.giglist{background:#16161a;border-radius:18px;padding:18px}
+.stamp{padding:4px 4px 14px;border-bottom:1px solid #26262c;margin-bottom:8px;font-weight:600}
+.stamp b{font-family:Anton,sans-serif;font-size:2rem;color:var(--acid);font-weight:400}
+.stampbar{height:8px;border-radius:99px;background:#26262c;margin:8px 0 6px;overflow:hidden}
+.stampbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--acid));transition:width .4s}
+.stamp small{color:var(--muted)}
+#gigList{list-style:none;margin:0;padding:0;max-height:420px;overflow-y:auto}
+#gigList li{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid #1f1f25}
+.gl{flex:1;text-align:left;background:none;border:0;color:var(--paper);cursor:pointer;padding:0;font:inherit;display:grid}
+.gl:hover .gv{color:var(--acid)}
+.gy{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acid);font-weight:800}
+.gv{font-weight:700;font-size:.95rem;line-height:1.25}
+.gt{font-size:.78rem;color:var(--muted)}
+.storybox{margin-top:40px;display:grid;grid-template-columns:1fr 1.3fr;gap:30px;background:var(--blue);border-radius:18px;padding:30px}
+@media(max-width:860px){.storybox{grid-template-columns:1fr;padding:22px}}
+.storybox .display{font-size:clamp(2rem,5vw,3.2rem);margin:6px 0 10px}
+.storybox .kicker{color:var(--ink)}
+#storyForm{display:grid;gap:12px}
+#storyForm label{display:grid;gap:5px;font-weight:600;font-size:.85rem}
+#storyForm input,#storyForm select,#storyForm textarea{font:inherit;padding:12px 14px;border-radius:12px;border:0;background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+#storyForm .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){#storyForm .row2{grid-template-columns:1fr}}
+#storyForm .btn{background:var(--ink);color:var(--paper);justify-self:start}
+.formnote{margin:0;font-weight:600}
+
 /* merch */
 .shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
 .item{border-radius:18px;padding:26px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
@@ -157,6 +213,7 @@ footer .display{font-size:3rem;color:var(--paper)}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 <body>
 <div class="draft">Draft preview</div>
@@ -170,9 +227,10 @@ footer .display{font-size:3rem;color:var(--paper)}
     <li><a href="#press">Press</a></li>
     <li><a href="#music">Music</a></li>
     <li><a href="#gigs">Gigs</a></li>
-    <li><a href="#fanmap">Fan Map</a></li>
+    <li><a href="#fanmap">Were You There?</a></li>
     <li><a href="#merch">Merch</a></li>
     <li><a href="#lyrics">Lyrics</a></li>
+    <li><a href="#mailing">Mailing List</a></li>
   </ul>
 </nav>
 
@@ -210,13 +268,13 @@ footer .display{font-size:3rem;color:var(--paper)}
 <section id="story" style="padding-bottom:40px">
   <div class="wrap">
     <div class="kicker">The story</div>
-    <h2 class="display reveal">From the shed<br>to the Alhambra</h2>
+    <h2 class="display reveal">From the Hut<br>to the Alhambra</h2>
     <div class="timeline">
-      <div class="stop"><div class="yr">2004</div><img src="img/tl-2004.webp" alt="The Draymin's soundproofed hut in Rosyth, 2004" loading="lazy"><h3>The shed in Rosyth</h3><p>Brothers Fraser and Craig Penman, Gec Livingstone and Gaz Louch start a band in a soundproofed shed at the bottom of the Penman family garden.</p></div>
+      <div class="stop"><div class="yr">2004</div><img src="img/tl-2004.webp" alt="The Draymin's soundproofed hut in Rosyth, 2004" loading="lazy"><h3>The Hut in Rosyth</h3><p>Brothers Fraser and Craig Penman, Gec Livingstone and Gaz Louch start a band in a soundproofed hut at the bottom of the Penman family garden, known to everyone as The Hut.</p></div>
       <div class="stop"><div class="yr">2005</div><img src="img/tl-2005.webp" alt="The Draymin's first gig at The Yard, Rosyth, May 2005" loading="lazy"><h3>First gig</h3><p>The Yard, Rosyth, May 2005. The banner was homemade. The noise was not small.</p></div>
-      <div class="stop"><div class="yr">2006</div><img src="img/tl-gardencity06.webp" alt="Hitching with a Garden City sign" loading="lazy"><h3>Garden City</h3><p>The first EP, recorded in that garden hut. It gets them to Alan McGee's Death Disco at Notting Hill Arts Club and the Cavern Club in Liverpool.</p></div>
+      <div class="stop"><div class="yr">2006</div><img src="img/tl-gardencity06.webp" alt="Hitching with a Garden City sign" loading="lazy"><h3>Garden City</h3><p>The first EP, recorded in The Hut. It gets them to Alan McGee's Death Disco at Notting Hill Arts Club and the Cavern Club in Liverpool.</p></div>
       <div class="stop"><div class="yr">2006</div><img src="img/tl-emi.webp" alt="The Draymin recording at EMI in London" loading="lazy"><h3>EMI, London</h3><p>Three tracks recorded at EMI's London studios. A sold-out London show supporting Louis XIV, and a tip as a band to watch in 2007.</p></div>
-      <div class="stop"><div class="yr">2007</div><img src="img/tl-2007.webp" alt="The Draymin at T in the Park, 2007" loading="lazy"><h3>Austin, Texas</h3><p>South by Southwest, 14 to 18 March. From the shed to one of the world's biggest music festivals. Then T in the Park.</p></div>
+      <div class="stop"><div class="yr">2007</div><img src="img/tl-2007.webp" alt="The Draymin at T in the Park, 2007" loading="lazy"><h3>Austin, Texas</h3><p>South by Southwest, 14 to 18 March. From The Hut to one of the world's biggest music festivals. Then T in the Park.</p></div>
       <div class="stop"><div class="yr">2008</div><img src="img/tl-2008.webp" alt="The Draymin on stage at the Alhambra, 2008" loading="lazy"><h3>The 'final' gig</h3><p>Fraser takes a job offshore. Around 1,000 people pack Alhambra 2 in Dunfermline to say goodbye. It doesn't stick.</p></div>
       <div class="stop"><div class="yr">2009</div><img src="img/tl-2009.webp" alt="The Draymin live at King Tut's, Glasgow" loading="lazy"><h3>Back again</h3><p>A year later they're back, with the 2point1 EP and a big night at Velocity.</p></div>
       <div class="stop"><div class="yr">2010</div><img src="img/tl-2010b.webp" alt="T Break stage poster, T in the Park 2010" loading="lazy" style="object-fit:contain;background:#0b0b0d"><h3>Five-piece</h3><p>Cal Nicol joins on keys. Heart Attack lands, and the band plays the T Break stage at T in the Park on Saturday 10 July.</p></div>
@@ -264,7 +322,7 @@ footer .display{font-size:3rem;color:var(--paper)}
 
 <section style="padding-top:0">
   <div class="wrap band">
-    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door"><figcaption class="credit">Photo: Stacey Philip</figcaption></figure>
+    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door"><figcaption class="credit">Photo: Stacey Philip, SP Photography</figcaption></figure>
     <div>
       <div class="kicker">The band</div>
       <h2 class="display reveal">Four lads<br>one door</h2>
@@ -288,7 +346,7 @@ footer .display{font-size:3rem;color:var(--paper)}
       <div class="rel" tabindex="0">
         <img class="cover" src="img/cover-gardencity.webp" alt="Garden City cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
         <div class="meta"><strong>Garden City</strong><br><small>Single, 2026. Tap for the story.</small>
-          <div class="story">Recorded in 2006 in the soundproofed shed at the bottom of the Penman garden. It got the band to Death Disco in London and the Cavern Club in Liverpool. Twenty years on, it finally got a proper release on 18 September 2026.<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+          <div class="story">Recorded in 2006 in The Hut, the soundproofed hut at the bottom of the Penman garden. It got the band to Death Disco in London and the Cavern Club in Liverpool. Twenty years on, it finally got a proper release on 18 September 2026.<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
       </div>
       <div class="rel" tabindex="0">
         <img class="cover" src="img/cover-selftitled.webp" alt="The Draymin cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
@@ -314,20 +372,62 @@ footer .display{font-size:3rem;color:var(--paper)}
     <div class="kicker">Gigs</div>
     <h2 class="display reveal">Next one?</h2>
     <p class="lede">Nothing announced yet. Mailing list first, everyone else after.</p>
-    <div class="secret">
+    <div class="secret" id="mailing" style="scroll-margin-top:90px">
       <div class="display">Hear it first</div>
       <form class="signup" onsubmit="event.preventDefault();this.querySelector('button').textContent='Coming soon';">
         <input type="email" placeholder="Your email" aria-label="Your email">
         <button class="btn" type="submit">Sign me up</button>
       </form>
     </div>
-    <div class="wyt" id="fanmap" style="scroll-margin-top:80px">
-      <figure style="margin:0"><img class="reveal" src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="max-height:520px;object-fit:cover;width:100%"><figcaption class="credit">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
-      <div>
-        <div class="kicker">Coming soon</div>
-        <h2 class="display" style="font-size:clamp(2.6rem,6vw,4.6rem)">Were you<br>there?</h2>
-        <p class="lede">Every Draymin gig we can remember, on one map. Tell us the ones we forgot. Send your photos, ticket stubs and stories, and we'll put the best ones up.</p>
+  </div>
+</section>
+
+<section id="fanmap" class="fan" style="scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="kicker">The fan map</div>
+    <h2 class="display reveal">Were you<br>there?</h2>
+    <p class="lede">Every Draymin gig we can remember, from The Yard to the Alhambra. Tap a pin, tick off the ones you were at, and tell us what happened. We know you remember more than we do.</p>
+
+    <div class="comp">
+      <div class="comp-badge">Win</div>
+      <div><div class="display">Best gig story wins tickets</div>
+      <p>The best story, photo or ticket stub wins a pair of tickets to our next show. <span class="draftnote">[Draft: prize and closing date to confirm]</span></p></div>
+    </div>
+
+    <div class="fanmap-grid">
+      <div class="mapbox">
+        <div id="gigmap" aria-label="Map of Draymin gigs"></div>
+        <div class="mapctl">
+          <button class="chip" id="tourBtn" type="button">&#9654; Play the tour</button>
+          <button class="chip" data-fly="fife" type="button">Fife</button>
+          <button class="chip" data-fly="uk" type="button">UK</button>
+          <button class="chip" data-fly="austin" type="button">Austin</button>
+        </div>
       </div>
+      <div class="giglist">
+        <div class="stamp"><b id="stampCount">0</b> of <span id="stampTotal">0</span> gigs ticked off<div class="stampbar"><i id="stampBar"></i></div><small id="stampMsg">Tick the ones you were at.</small></div>
+        <ol id="gigList"></ol>
+      </div>
+    </div>
+
+    <div class="storybox" id="tellus">
+      <div>
+        <div class="kicker">Tell us</div>
+        <h3 class="display">Your story,<br>your photos</h3>
+        <p>Best night, worst hangover, the gig we forgot existed. Photos, videos and ticket stubs all welcome. The good ones go on the map.</p>
+        <figure style="margin:18px 0 0"><img src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="border-radius:14px;width:100%;max-height:340px;object-fit:cover" loading="lazy"><figcaption class="credit" style="color:var(--ink);opacity:.75">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      </div>
+      <form id="storyForm">
+        <label>Which gig?<select id="storyGig" required><option value="">Pick one</option></select></label>
+        <label>Your story<textarea rows="5" placeholder="It was 2008, I lost a shoe at the Alhambra..." required></textarea></label>
+        <label>Photos or ticket stubs<input type="file" accept="image/*,video/*" multiple></label>
+        <div class="row2">
+          <label>Your name<input type="text" placeholder="First name is fine"></label>
+          <label>Email<input type="email" placeholder="So we can tell you if you win" required></label>
+        </div>
+        <button class="btn" type="submit">Send it in</button>
+        <p class="formnote" id="storyNote"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -415,5 +515,7 @@ c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end)});
 const ly=document.getElementById('lyricImg');ly.addEventListener('click',()=>open(ly.dataset.full,ly.dataset.cap));
 lb.addEventListener('click',()=>lb.classList.remove('on'));addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')})})();
 </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="js/fanmap.js"></script>
 </body>
 </html>
