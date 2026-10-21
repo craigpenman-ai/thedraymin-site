@@ -57,9 +57,12 @@ nav ul a:hover{color:var(--acid)}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.75) 0%,rgba(11,11,13,.1) 35%,rgba(11,11,13,.1) 60%,rgba(11,11,13,.9) 100%)}
 .hero .inner{position:relative;z-index:2;padding:72px 24px 48px;width:100%;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh}
 .hero h1{font-size:clamp(3.4rem,9vw,8rem);line-height:.9}
-.logo-h{margin:0;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
-.hero .logo-h img{position:static;inset:auto;display:block;width:min(500px,70vw);height:auto;object-fit:contain;transform:none!important;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
-@media(max-width:760px){.hero .logo-h img{width:min(300px,62vw);height:auto}}
+.logo-h{margin:0;position:relative;width:min(270px,34vw);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.logo-h:before{content:"";position:absolute;left:50%;top:50%;width:260vw;height:21.6%;transform:translate(-50%,-50%) rotate(-27.7deg);z-index:0;pointer-events:none;
+ background:linear-gradient(180deg,#edf809 0 20.5%,transparent 20.5% 39.7%,#edf809 39.7% 60.3%,transparent 60.3% 79.5%,#edf809 79.5% 100%);
+ -webkit-mask-image:linear-gradient(90deg,transparent 2%,#000 20%,#000 53%,transparent 70%);mask-image:linear-gradient(90deg,transparent 2%,#000 20%,#000 53%,transparent 70%)}
+.hero .logo-h img{position:relative;z-index:1;inset:auto;display:block;width:100%;height:auto;object-fit:contain;transform:none!important;filter:drop-shadow(0 10px 30px rgba(0,0,0,.6))}
+@media(max-width:760px){.logo-h{width:min(200px,50vw)}}
 .hero h1 span{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .hero p{max-width:520px;font-size:1.1rem;margin-top:14px}
 @media(max-width:760px){
@@ -216,7 +219,8 @@ summary::-webkit-details-marker{display:none}
 .deck .sheet img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;pointer-events:none;background:#fff}
 .deck .sheet.drag{transition:none;cursor:grabbing}
 .deck .sheet:before{content:"";position:absolute;top:-10px;left:50%;width:80px;height:22px;margin-left:-40px;background:rgba(220,255,60,.75);transform:rotate(-3deg);z-index:2}
-.deckbar{display:flex;align-items:center;gap:12px}
+.deckbar{display:flex;align-items:center;gap:12px;margin-top:56px}
+.deckbar .chip{min-width:48px;min-height:44px}
 .deckcount{font-family:Anton,sans-serif;font-size:1.5rem;color:var(--acid);min-width:5.5ch;text-align:center}
 .lyrgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:24px}
 .lyrgrid img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:10px;background:#fff;cursor:zoom-in;transition:transform .2s}
@@ -255,7 +259,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   <img id="heroImg" src="img/alhambra-crowd.webp" alt="The Draymin on stage at the Alhambra Theatre, Dunfermline, with a full crowd behind them">
   <div class="inner">
     <div>
-    <h1 id="wordmark" class="logo-h"><img src="img/logo.webp" alt="The Draymin, est. 2005" width="1400" height="789"></h1>
+    <h1 id="wordmark" class="logo-h"><img src="img/badge.webp" alt="The Draymin, Rosyth, est. 2005" width="520" height="520"></h1>
     </div>
     <div>
     <p>1,700 people at the Alhambra said it was time to come back. So we did.</p>
@@ -466,7 +470,7 @@ footer .display{font-size:3rem;color:var(--paper)}
   <div class="wrap">
     <div class="kicker">Lyrics</div>
     <h2 class="display reveal">Every word</h2>
-    <p class="lede">The original sheets, scribbles, crossings out and all. 45 of them, straight out of the box.</p>
+    <p class="lede">The original sheets, scribbles, crossings out and all, straight out of the box.</p>
     <div class="lyrstage">
       <div class="deck" id="deck" tabindex="0" aria-label="Lyric sheets. Swipe or use the arrow keys."></div>
       <div class="deckbar"><button class="chip" id="lyPrev" type="button" aria-label="Previous sheet">&larr;</button><span class="deckcount" id="lyCount">01 / 45</span><button class="chip" id="lyNext" type="button" aria-label="Next sheet">&rarr;</button><button class="chip" id="lyShuf" type="button">Shuffle</button></div>
