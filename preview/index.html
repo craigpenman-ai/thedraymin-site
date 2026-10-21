@@ -117,7 +117,8 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .listen .btn{background:transparent;color:var(--paper);border:2px solid var(--acid)}
 @media(max-width:760px){.listen{flex-wrap:nowrap;gap:8px}.listen .btn{padding:10px 12px;font-size:.68rem;letter-spacing:.06em;white-space:nowrap;flex:1;text-align:center}}
 .listen .btn:hover{background:var(--acid);color:var(--ink)}
-.releases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.releases{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 24px 30px;margin:0 -24px;scrollbar-width:thin;align-items:flex-start}
+.releases .rel{flex:0 0 min(78vw,320px);scroll-snap-align:start}
 .rel{background:#16161a;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .3s}
 .rel:hover{transform:translateY(-6px) rotate(-1deg)}
 .rel .cover{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:2.4rem;text-transform:uppercase;text-align:center;padding:20px}
@@ -402,6 +403,7 @@ footer .display{font-size:3rem;color:var(--paper)}
           <div class="story">The debut album, out 2 April 2012 on Townsend Records. It made the Official Scottish Albums Chart.<br><br><a class="btn" href="https://open.spotify.com/album/4u0C2OYZU7bjaaCfxcjPdZ" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
       </div>
     </div>
+    <div class="hint">Swipe or scroll sideways</div>
   </div>
 </section>
 
