@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Draymin</title>
+<meta name="description" content="The Draymin, Rosyth indie band since 2005. Next gig: The Liquid Room, Edinburgh, Saturday 1 May 2027. Tickets on See Tickets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thedraymin.com/">
+<meta property="og:title" content="The Draymin">
+<meta property="og:description" content="Rosyth and Dunfermline since 2005. Next gig: The Liquid Room, Edinburgh, Saturday 1 May 2027.">
+<meta property="og:image" content="https://thedraymin.com/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="canonical" href="https://thedraymin.com/">
+<link rel="preload" as="image" href="img/alhambra-crowd.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -12,13 +24,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;max-width:100%}
 body{background:var(--ink);color:var(--paper);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;overflow-x:clip;max-width:100%;position:relative;overscroll-behavior-x:none}
-section,footer,.bleed{max-width:100vw;overflow-x:clip}
+section,footer{max-width:100vw;overflow-x:clip}
 a{color:inherit}
 img{display:block;max-width:100%}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 .display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.9}
 .kicker{font-weight:800;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acid)}
-.draft{position:fixed;bottom:14px;left:14px;z-index:60;background:var(--acid);color:var(--ink);font-weight:800;font-size:.7rem;letter-spacing:.12em;padding:6px 10px;border-radius:4px;text-transform:uppercase}
 
 /* nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;mix-blend-mode:difference}
@@ -126,11 +137,6 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .rel .story{max-height:0;overflow:hidden;transition:max-height .4s;color:#c9c6bf;font-size:.95rem}
 .rel.open .story{max-height:320px;margin-top:10px}
 
-/* full bleed photo */
-.bleed{height:70vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
-.bleed .bg{position:absolute;left:0;right:0;top:-25%;height:150%;background:url(img/alhambra-bw.webp) center/cover;will-change:transform}
-.bleed h2{position:relative}
-.bleed h2{text-shadow:0 4px 30px rgba(0,0,0,.6)}
 
 
 /* gigs */
@@ -233,6 +239,37 @@ footer{padding:60px 0;border-top:1px solid #222;color:var(--muted);font-size:.85
 footer .display{font-size:3rem;color:var(--paper)}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
 .reveal.in{opacity:1;transform:none}
+
+/* next gig */
+.nextgig{display:inline-flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;margin-top:16px;color:var(--paper);text-decoration:none;font-weight:600;background:rgba(11,11,13,.6);padding:10px 16px;border-radius:14px}
+.nextgig b{color:var(--acid);text-transform:uppercase;letter-spacing:.08em;font-size:.85rem}
+a.marquee{display:block;text-decoration:none}
+nav a.navtix{color:var(--acid)}
+.gigcard{display:flex;gap:24px;align-items:center;flex-wrap:wrap;background:var(--ink);color:var(--paper);border-radius:18px;padding:22px 26px}
+.gigdate{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--acid);color:var(--ink);border-radius:14px;width:96px;height:104px;font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.12em;flex:none}
+.gigdate b{font-family:Anton,sans-serif;font-size:2.8rem;line-height:1;font-weight:400;letter-spacing:0}
+.giginfo{display:flex;flex-direction:column;gap:2px;flex:1;min-width:200px}
+.giginfo strong{font-family:Anton,sans-serif;font-weight:400;font-size:1.8rem;text-transform:uppercase;line-height:1.05}
+.giginfo .onsale{color:var(--acid);font-weight:700;margin-top:4px}
+.gigcard .tix{font-size:1rem;padding:16px 26px}
+.btn.dark{background:var(--ink);color:var(--paper)}
+.listen{display:flex;gap:10px;flex-wrap:wrap}
+
+/* photo slideshow */
+.show{position:relative;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:#16161a;outline:none;touch-action:pan-y;user-select:none}
+.show:focus-visible{box-shadow:0 0 0 3px var(--acid)}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.slide.on{opacity:1;pointer-events:auto}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 6s ease-out}
+.slide.on img{transform:scale(1)}
+.slide.fit{background:#0b0b0d}
+.slide.fit:before{content:"";position:absolute;inset:-30px;background:var(--bg) center/cover;filter:blur(24px) brightness(.45)}
+.slide.fit img{position:relative;object-fit:contain}
+.slide figcaption{position:absolute;left:16px;bottom:16px;background:rgba(11,11,13,.75);color:var(--paper);font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px}
+.showbar{margin-top:18px;justify-content:center}
+@media(min-width:701px){.show{aspect-ratio:auto;height:min(70vh,755px)}}
+@media(max-width:700px){.show{aspect-ratio:4/3}}
+@media(prefers-reduced-motion:reduce){.slide,.slide img{transition:none}.slide img{transform:none}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -242,15 +279,16 @@ footer .display{font-size:3rem;color:var(--paper)}
   <a class="logo" href="#top">THE DRAYMIN</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
   <ul>
+    <li><a href="#gigs" class="navtix">Tickets</a></li>
     <li><a href="#video">Video</a></li>
+    <li><a href="#band">Band</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#fanmap">Win tickets</a></li>
+    <li><a href="#merch">Merch</a></li>
     <li><a href="#story">Story</a></li>
     <li><a href="#press">Press</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#gigs">Gigs</a></li>
-    <li><a href="#fanmap">Were You There?</a></li>
-    <li><a href="#merch">Merch</a></li>
     <li><a href="#lyrics">Lyrics</a></li>
-    <li><a href="#mailing">Mailing List</a></li>
   </ul>
 </nav>
 
@@ -262,6 +300,7 @@ footer .display{font-size:3rem;color:var(--paper)}
     </div>
     <div>
     <p>1,700 people at the Alhambra said it was time to come back. So we did.</p>
+    <a class="nextgig" href="#gigs"><span class="kicker">Next gig</span> The Liquid Room, Edinburgh. Sat 1 May 2027 <b>Tickets &rarr;</b></a>
     <div class="cheer">
       <button class="btn" id="noise">Hold to make some noise</button>
       <div>
@@ -273,7 +312,33 @@ footer .display{font-size:3rem;color:var(--paper)}
   </div>
 </header>
 
-<div class="marquee"><div>Next gig: The Liquid Room, Edinburgh, 1 May 2027 &nbsp;&bull;&nbsp; Full ticket info to follow &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Next gig: The Liquid Room, Edinburgh, 1 May 2027 &nbsp;&bull;&nbsp; Full ticket info to follow &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; Next gig: The Liquid Room, Edinburgh, 1 May 2027 &nbsp;&bull;&nbsp; Full ticket info to follow &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; The Alhambra vlog is on its way &nbsp;&bull;&nbsp; </div></div>
+<a class="marquee" href="#gigs" aria-label="Next gig: The Liquid Room, Edinburgh, Saturday 1 May 2027. Tickets."><div>Next gig: The Liquid Room, Edinburgh, Sat 1 May 2027 &nbsp;&bull;&nbsp; <span class="onsale" data-before="Tickets on sale Sat 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Sat 31 October, 10am</span> &nbsp;&bull;&nbsp; Win tickets on the fan map &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; Next gig: The Liquid Room, Edinburgh, Sat 1 May 2027 &nbsp;&bull;&nbsp; <span class="onsale" data-before="Tickets on sale Sat 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Sat 31 October, 10am</span> &nbsp;&bull;&nbsp; Win tickets on the fan map &nbsp;&bull;&nbsp; Garden City out now &nbsp;&bull;&nbsp; Alhambra: sold out &nbsp;&bull;&nbsp; </div></a>
+
+
+
+
+
+<section id="gigs" class="gigs" style="scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="kicker">Next gig</div>
+    <h2 class="display reveal">The Liquid Room<br>Edinburgh</h2>
+    <div class="gigcard">
+      <div class="gigdate" aria-hidden="true"><span>Sat</span><b>01</b><span>May 2027</span></div>
+      <div class="giginfo">
+        <strong>The Liquid Room, Edinburgh</strong>
+        <span>Saturday 1 May 2027, 7pm</span>
+        <span class="onsale" data-before="Tickets on sale Saturday 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Saturday 31 October, 10am</span>
+      </div>
+      <a class="btn tix" href="https://www.seetickets.com/tour/the-draymin-liquid-rooms-edinburgh" target="_blank" rel="noopener" data-before="Set a ticket reminder" data-after="Buy tickets">Set a ticket reminder</a>
+    </div>
+    <p class="lede" style="margin-top:22px">Tickets are through See Tickets. Set a reminder there and you'll hear the moment they go live.</p>
+    <div class="secret" id="follow">
+      <div class="display">Don't miss it</div>
+      <div class="listen"><a class="btn dark" href="https://www.instagram.com/the_draymin/" target="_blank" rel="noopener">Instagram</a><a class="btn dark" href="https://www.facebook.com/thedraymin" target="_blank" rel="noopener">Facebook</a></div>
+    </div>
+    <figure style="margin:30px 0 0"><img class="reveal" src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="border-radius:18px;width:100%;max-height:520px;object-fit:cover" loading="lazy"><figcaption class="credit">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+  </div>
+</section>
 
 <section id="video" style="padding-bottom:20px">
   <div class="wrap">
@@ -281,6 +346,121 @@ footer .display{font-size:3rem;color:var(--paper)}
     <h2 class="display reveal">Watch it</h2>
     <video src="media/alhambra-25s.mp4" poster="media/poster.jpg" controls playsinline preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:18px;background:#000;display:block" title="The Draymin live at the Alhambra, Dunfermline"></video>
     <p class="hint" style="margin-top:14px">Live at the Alhambra, October 2026. The full vlog is on its way.</p>
+  </div>
+</section>
+
+<section id="band" style="padding-top:70px">
+  <div class="wrap band">
+    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door"><figcaption class="credit">Photo: Stacey Philip, SP Photography</figcaption></figure>
+    <div>
+      <div class="kicker">The band</div>
+      <h2 class="display reveal">Four lads<br>one door</h2>
+      <ul class="members">
+        <li>Fraz Penman <em>Vocals, guitar</em></li>
+        <li>Craig Penman <em>Lead guitar, backing vocals</em></li>
+        <li>Gec Livingstone <em>Bass, synth, backing vocals</em></li>
+        <li>Gaz Louch <em>Drums, backing vocals</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="photos" style="padding-top:40px;scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="kicker">Photos</div>
+    <h2 class="display reveal">Then<br>and now</h2>
+    <div class="show" id="show" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Photos of The Draymin, 2005 to 2026. Use the arrow keys to move through them.">
+      <figure class="slide on"><img src="img/slides/s01.webp" srcset="img/slides/s01-m.webp 800w, img/slides/s01.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The Draymin's first ever photoshoot in 2005, the band in a rehearsal room with guitars and a drum kit" draggable="false"><figcaption>First ever photoshoot, 2005</figcaption></figure>
+      <figure class="slide fit" style="--bg:url(img/slides/s02-m.webp)"><img data-src="img/slides/s02.webp" data-srcset="img/slides/s02-m.webp 800w, img/slides/s02.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The band hanging out in The Hut in Rosyth, 2005" loading="lazy" draggable="false"><figcaption>All the lads down The Hut, 2005</figcaption></figure>
+      <figure class="slide fit" style="--bg:url(img/slides/s03-m.webp)"><img data-src="img/slides/s03.webp" data-srcset="img/slides/s03-m.webp 800w, img/slides/s03.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="A drum kit set up in the studio, black and white" loading="lazy" draggable="false"></figure>
+      <figure class="slide"><img data-src="img/slides/s04.webp" data-srcset="img/slides/s04-m.webp 800w, img/slides/s04.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The four band members standing together in The Hut" loading="lazy" draggable="false"></figure>
+      <figure class="slide"><img data-src="img/slides/s05.webp" data-srcset="img/slides/s05-m.webp 800w, img/slides/s05.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The band recording in a studio, black and white" loading="lazy" draggable="false"></figure>
+      <figure class="slide"><img data-src="img/slides/s06.webp" data-srcset="img/slides/s06-m.webp 800w, img/slides/s06.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The four band members in front of a painted wall" loading="lazy" draggable="false"></figure>
+      <figure class="slide"><img data-src="img/slides/s07.webp" data-srcset="img/slides/s07-m.webp 800w, img/slides/s07.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The packed Alhambra crowd seen from the stage, lit green" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s08.webp" data-srcset="img/slides/s08-m.webp 800w, img/slides/s08.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="Guitarist in a wavy patterned shirt playing a sunburst guitar at the Alhambra" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s09.webp" data-srcset="img/slides/s09-m.webp 800w, img/slides/s09.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="Bassist singing on stage at the Alhambra, black and white" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s10.webp" data-srcset="img/slides/s10-m.webp 800w, img/slides/s10.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The drummer playing at the Alhambra" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s11.webp" data-srcset="img/slides/s11-m.webp 800w, img/slides/s11.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The band on stage at the Alhambra with drumsticks flying through the air" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s12.webp" data-srcset="img/slides/s12-m.webp 800w, img/slides/s12.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The band waving to the crowd at the end of the Alhambra show" loading="lazy" draggable="false"><figcaption>Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
+      <figure class="slide"><img data-src="img/slides/s13.webp" data-srcset="img/slides/s13-m.webp 800w, img/slides/s13.webp 1600w" sizes="(max-width:1180px) 100vw, 1132px" alt="The four band members laughing in front of a metal shutter, black and white" loading="lazy" draggable="false"></figure>
+    </div>
+    <div class="deckbar showbar"><button class="chip" id="shPrev" type="button" aria-label="Previous photo">&larr;</button><span class="deckcount" id="shCount" aria-live="polite">01 / 13</span><button class="chip" id="shNext" type="button" aria-label="Next photo">&rarr;</button><button class="chip" id="shPlay" type="button" aria-pressed="false">Pause</button></div>
+  </div>
+</section>
+
+<section id="music">
+  <div class="wrap">
+    <div class="kicker">Music</div>
+    <h2 class="display reveal">Press play</h2>
+    <div class="listen"><a class="btn" href="https://open.spotify.com/artist/1YXaRWc1EWwiLTLY15uK8U" target="_blank" rel="noopener">Spotify</a><a class="btn" href="https://music.apple.com/gb/artist/the-draymin/287873773" target="_blank" rel="noopener">Apple Music</a><a class="btn" href="https://thedraymin.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a></div>
+    <div class="releases">
+      <div class="rel" tabindex="0">
+        <img class="cover" src="img/cover-gardencity.webp" alt="Garden City cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
+        <div class="meta"><strong>Garden City</strong><br><small>Single, 2026. Tap for the story.</small>
+          <div class="story">Recorded in 2006 in The Hut, the soundproofed hut at the bottom of the Penman garden. It got the band to Death Disco in London and the Cavern Club in Liverpool. Twenty years on, it finally got a proper release on 18 September 2026.<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+      </div>
+      <div class="rel" tabindex="0">
+        <img class="cover" src="img/cover-selftitled.webp" alt="The Draymin cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
+        <div class="meta"><strong>The Draymin</strong><br><small>Album, 2026. Tap for the story.</small>
+          <div class="story">Old tracks, finally together on streaming services. Recordings from EMI in London, The Hut in Rosyth, Lofi in Glasgow and The Attic in Dunfermline.<br><br><a class="btn" href="https://open.spotify.com/album/72KkfMP82FuDOsYei0Igyt" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+      </div>
+      <div class="rel" tabindex="0">
+        <img class="cover" src="img/cover-remixed.webp" alt="The Draymin Remixed cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
+        <div class="meta"><strong>The Draymin Remixed</strong><br><small>Single, 2026. Tap for the story.</small>
+          <div class="story">Gec's first go at showing off his remixing in Ableton. He made the Intro track especially for the band to walk out to at the Alhambra.<br><br><a class="btn" href="https://open.spotify.com/album/6UBEcxvFbOJWPurXpSXNlM" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+      </div>
+      <div class="rel" tabindex="0">
+        <img class="cover" src="img/cover-skb.webp" alt="Should've Known Better cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
+        <div class="meta"><strong>Should've Known Better</strong><br><small>Album, 2012, Townsend Records. Tap for the story.</small>
+          <div class="story">The debut album, out 2 April 2012 on Townsend Records. It made the Official Scottish Albums Chart.<br><br><a class="btn" href="https://open.spotify.com/album/4u0C2OYZU7bjaaCfxcjPdZ" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
+      </div>
+    </div>
+    <div class="hint">Swipe or scroll sideways</div>
+  </div>
+</section>
+
+<section id="fanmap" class="fan" style="scroll-margin-top:60px">
+  <div class="wrap">
+    <div class="kicker">The fan map</div>
+    <h2 class="display reveal">Were you<br>there?</h2>
+    <p class="lede">We played hundreds of gigs and remember about eleven of them. Help us fill the map. Tap anywhere you saw us play, drop a pin and tell us what happened.</p>
+
+    <div class="comp">
+      <div class="comp-badge">Win</div>
+      <div><div class="display">Best story with a photo wins</div>
+      <p>Send us your best Draymin gig story with a photo and you could win tickets to The Liquid Room, Edinburgh, on 1 May 2027. Closes 4 December 2026.</p></div>
+    </div>
+
+    <div class="mapbox">
+      <div id="gigmap" aria-label="Map of Draymin gigs"></div>
+      <div class="maphint" id="mapHint">Tap the map to drop a pin</div>
+      <div class="mapctl">
+        <button class="chip" id="tourBtn" type="button">&#9654; Play the tour</button>
+        <button class="chip" data-fly="fife" type="button">Fife</button>
+        <button class="chip" data-fly="uk" type="button">UK</button>
+        <button class="chip" data-fly="austin" type="button">Austin</button>
+      </div>
+    </div>
+
+    <div class="mapcta">
+      <a class="btn addgig" id="addGig" href="#" target="_blank" rel="noopener">+ Add a gig to the map</a>
+      <span>Any gig, any year, any venue. Photos make it a contender.</span>
+    </div>
+
+    <details class="years">
+      <summary>Browse the gigs we remember, by year</summary>
+      <div id="yearList"></div>
+    </details>
+  </div>
+</section>
+
+<section id="merch">
+  <div class="wrap">
+    <div class="kicker">Merch</div>
+    <h2 class="display reveal">Wear it</h2>
+    <div class="shop">
+      <a class="item merch" href="https://www.stjarnaapparel.co.uk/collections/the-draymin" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><span class="tag">Out now</span><div class="mgrid"><img src="img/merch/shirt.webp" alt="The Draymin FC football shirt, Blackout" loading="lazy"><img src="img/merch/tee.webp" alt="The Draymin T-shirt" loading="lazy"><img src="img/merch/hat.webp" alt="The Draymin bucket hat" loading="lazy"></div><div><div class="display">The Draymin</div><p>The Draymin collection with Stj&auml;rna Apparel. Football shirt, tee and bucket hat.</p><span class="btn" style="margin-top:14px">Shop the collection</span></div></a>
+    </div>
   </div>
 </section>
 
@@ -356,116 +536,6 @@ footer .display{font-size:3rem;color:var(--paper)}
 </section>
 <div id="lightbox"><img alt=""><p></p></div>
 
-<section style="padding-top:0">
-  <div class="wrap band">
-    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door"><figcaption class="credit">Photo: Stacey Philip, SP Photography</figcaption></figure>
-    <div>
-      <div class="kicker">The band</div>
-      <h2 class="display reveal">Four lads<br>one door</h2>
-      <ul class="members">
-        <li>Fraz Penman <em>Vocals, guitar</em></li>
-        <li>Craig Penman <em>Lead guitar, backing vocals</em></li>
-        <li>Gec Livingstone <em>Bass, synth, backing vocals</em></li>
-        <li>Gaz Louch <em>Drums, backing vocals</em></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="bleed"><div class="bg" id="bleedBg"></div><h2 class="display">Should've<br>known better</h2></div>
-
-<section id="music">
-  <div class="wrap">
-    <div class="kicker">Music</div>
-    <h2 class="display reveal">Press play</h2>
-    <div class="listen"><a class="btn" href="https://open.spotify.com/artist/1YXaRWc1EWwiLTLY15uK8U" target="_blank" rel="noopener">Spotify</a><a class="btn" href="https://music.apple.com/gb/artist/the-draymin/287873773" target="_blank" rel="noopener">Apple Music</a><a class="btn" href="https://thedraymin.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a></div>
-    <div class="releases">
-      <div class="rel" tabindex="0">
-        <img class="cover" src="img/cover-gardencity.webp" alt="Garden City cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
-        <div class="meta"><strong>Garden City</strong><br><small>Single, 2026. Tap for the story.</small>
-          <div class="story">Recorded in 2006 in The Hut, the soundproofed hut at the bottom of the Penman garden. It got the band to Death Disco in London and the Cavern Club in Liverpool. Twenty years on, it finally got a proper release on 18 September 2026.<br><br><a class="btn" href="https://open.spotify.com/album/3jizcrLwFOcfVOHpG7oL0q" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
-      </div>
-      <div class="rel" tabindex="0">
-        <img class="cover" src="img/cover-selftitled.webp" alt="The Draymin cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
-        <div class="meta"><strong>The Draymin</strong><br><small>Album, 2026. Tap for the story.</small>
-          <div class="story">Old tracks, finally together on streaming services. Recordings from EMI in London, The Hut in Rosyth, Lofi in Glasgow and The Attic in Dunfermline.<br><br><a class="btn" href="https://open.spotify.com/album/72KkfMP82FuDOsYei0Igyt" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
-      </div>
-      <div class="rel" tabindex="0">
-        <img class="cover" src="img/cover-remixed.webp" alt="The Draymin Remixed cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
-        <div class="meta"><strong>The Draymin Remixed</strong><br><small>Single, 2026. Tap for the story.</small>
-          <div class="story">Gec's first go at showing off his remixing in Ableton. He made the Intro track especially for the band to walk out to at the Alhambra.<br><br><a class="btn" href="https://open.spotify.com/album/6UBEcxvFbOJWPurXpSXNlM" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
-      </div>
-      <div class="rel" tabindex="0">
-        <img class="cover" src="img/cover-skb.webp" alt="Should've Known Better cover art" loading="lazy" style="padding:0;width:100%;aspect-ratio:1;object-fit:cover">
-        <div class="meta"><strong>Should've Known Better</strong><br><small>Album, 2012, Townsend Records. Tap for the story.</small>
-          <div class="story">The debut album, out 2 April 2012 on Townsend Records. It made the Official Scottish Albums Chart.<br><br><a class="btn" href="https://open.spotify.com/album/4u0C2OYZU7bjaaCfxcjPdZ" target="_blank" rel="noopener" onclick="event.stopPropagation()">Play on Spotify</a></div></div>
-      </div>
-    </div>
-    <div class="hint">Swipe or scroll sideways</div>
-  </div>
-</section>
-
-<section id="gigs" class="gigs">
-  <div class="wrap">
-    <div class="kicker">Gigs</div>
-    <h2 class="display reveal">Next one?</h2>
-    <p class="lede">The Liquid Room, Edinburgh. Saturday 1 May 2027. Full ticket info to follow, and the mailing list hears first.</p>
-    <div class="secret" id="mailing" style="scroll-margin-top:90px">
-      <div class="display">Hear it first</div>
-      <form class="signup" onsubmit="event.preventDefault();this.querySelector('button').textContent='Coming soon';">
-        <input type="email" placeholder="Your email" aria-label="Your email">
-        <button class="btn" type="submit">Sign me up</button>
-      </form>
-    </div>
-    <figure style="margin:30px 0 0"><img class="reveal" src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="border-radius:18px;width:100%;max-height:520px;object-fit:cover" loading="lazy"><figcaption class="credit">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
-  </div>
-</section>
-
-<section id="fanmap" class="fan" style="scroll-margin-top:60px">
-  <div class="wrap">
-    <div class="kicker">The fan map</div>
-    <h2 class="display reveal">Were you<br>there?</h2>
-    <p class="lede">We played hundreds of gigs and remember about eleven of them. Help us fill the map. Tap anywhere you saw us play, drop a pin and tell us what happened.</p>
-
-    <div class="comp">
-      <div class="comp-badge">Win</div>
-      <div><div class="display">Best story with a photo wins</div>
-      <p>Send us your best Draymin gig story with a photo and you could win tickets to our next show. Closes 4 December 2026.</p></div>
-    </div>
-
-    <div class="mapbox">
-      <div id="gigmap" aria-label="Map of Draymin gigs"></div>
-      <div class="maphint" id="mapHint">Tap the map to drop a pin</div>
-      <div class="mapctl">
-        <button class="chip" id="tourBtn" type="button">&#9654; Play the tour</button>
-        <button class="chip" data-fly="fife" type="button">Fife</button>
-        <button class="chip" data-fly="uk" type="button">UK</button>
-        <button class="chip" data-fly="austin" type="button">Austin</button>
-      </div>
-    </div>
-
-    <div class="mapcta">
-      <a class="btn addgig" id="addGig" href="#" target="_blank" rel="noopener">+ Add a gig to the map</a>
-      <span>Any gig, any year, any venue. Photos make it a contender.</span>
-    </div>
-
-    <details class="years">
-      <summary>Browse the gigs we remember, by year</summary>
-      <div id="yearList"></div>
-    </details>
-  </div>
-</section>
-
-<section id="merch">
-  <div class="wrap">
-    <div class="kicker">Merch</div>
-    <h2 class="display reveal">Wear it</h2>
-    <div class="shop">
-      <a class="item merch" href="https://www.stjarnaapparel.co.uk/collections/the-draymin" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><span class="tag">Out now</span><div class="mgrid"><img src="img/merch/shirt.webp" alt="The Draymin FC football shirt, Blackout" loading="lazy"><img src="img/merch/tee.webp" alt="The Draymin T-shirt" loading="lazy"><img src="img/merch/hat.webp" alt="The Draymin bucket hat" loading="lazy"></div><div><div class="display">The Draymin</div><p>The Draymin collection with Stj&auml;rna Apparel. Football shirt, tee and bucket hat.</p><span class="btn" style="margin-top:14px">Shop the collection</span></div></a>
-    </div>
-  </div>
-</section>
-
 <section id="lyrics" style="scroll-margin-top:60px">
   <div class="wrap">
     <div class="kicker">Lyrics</div>
@@ -478,6 +548,11 @@ footer .display{font-size:3rem;color:var(--paper)}
     </div>
   </div>
 </section>
+
+
+
+
+
 <footer>
   <div class="wrap">
     <div class="display">The Draymin</div>
@@ -489,9 +564,8 @@ footer .display{font-size:3rem;color:var(--paper)}
 <script>
 // hero parallax
 const hero=document.getElementById('heroImg');
-const mob=matchMedia('(max-width:760px)'),bleed=document.getElementById('bleedBg');
-addEventListener('scroll',()=>{if(!mob.matches)hero.style.transform=`scale(1.08) translateY(${scrollY*0.25}px)`;
-  const b=bleed.parentElement.getBoundingClientRect();if(b.bottom>0&&b.top<innerHeight){bleed.style.transform=`translateY(${(b.top+b.height/2-innerHeight/2)*-0.3}px)`}},{passive:true});
+const mob=matchMedia('(max-width:760px)');
+addEventListener('scroll',()=>{if(!mob.matches&&scrollY<innerHeight*1.2)hero.style.transform=`scale(1.08) translateY(${scrollY*0.25}px)`},{passive:true});
 
 // hamburger
 const nav=document.querySelector('nav'),burger=document.getElementById('burger');
@@ -532,6 +606,29 @@ tick();
 ['mouseup','mouseleave','touchend','touchcancel'].forEach(e=>btn.addEventListener(e,()=>{holding=false;touch?unlock():ensureCtx()}));
 btn.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();holding=true;startSong()}});
 btn.addEventListener('keyup',()=>holding=false);
+
+// tickets: switch wording once they go on sale (31 Oct 2026, 10:00 UK time)
+(()=>{if(Date.now()>=Date.parse('2026-10-31T10:00:00Z'))document.querySelectorAll('[data-after]').forEach(e=>e.textContent=e.dataset.after)})();
+
+// photo slideshow
+(()=>{const show=document.getElementById('show');if(!show)return;
+const sl=[...show.querySelectorAll('.slide')],N=sl.length,cnt=document.getElementById('shCount'),pb=document.getElementById('shPlay');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let cur=0,timer=null,paused=reduce,visible=false;
+const pad=n=>String(n).padStart(2,'0');
+const load=i=>{const im=sl[(i+N)%N].querySelector('img');if(im.dataset.src){im.srcset=im.dataset.srcset;im.src=im.dataset.src;delete im.dataset.src}};
+function go(i){sl[cur].classList.remove('on');cur=(i+N)%N;load(cur);sl[cur].classList.add('on');load(cur+1);cnt.textContent=pad(cur+1)+' / '+pad(N)}
+function arm(){clearInterval(timer);if(!paused&&visible)timer=setInterval(()=>go(cur+1),5000)}
+function setPaused(p){paused=p;pb.textContent=p?'Play':'Pause';pb.setAttribute('aria-pressed',p);arm()}
+document.getElementById('shNext').addEventListener('click',()=>{go(cur+1);arm()});
+document.getElementById('shPrev').addEventListener('click',()=>{go(cur-1);arm()});
+pb.addEventListener('click',()=>setPaused(!paused));
+show.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){go(cur+1);arm()}if(e.key==='ArrowLeft'){go(cur-1);arm()}});
+let sx=null;show.addEventListener('pointerdown',e=>{sx=e.clientX});
+show.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){go(cur+(dx<0?1:-1));arm()}});
+show.addEventListener('mouseenter',()=>clearInterval(timer));show.addEventListener('mouseleave',arm);
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)load(cur+1);arm()},{threshold:.3}).observe(show);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(timer);else arm()});
+setPaused(paused);go(0)})();
 
 // release flip
 document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('open');r.addEventListener('click',t);r.addEventListener('keydown',e=>{if(e.key==='Enter')t()})});
@@ -576,7 +673,7 @@ const up=e=>{if(!dn)return;dn=false;topF.classList.remove('drag');const dx=e.cli
 deck.addEventListener('pointerup',up);deck.addEventListener('pointercancel',up);lay();
 lb.addEventListener('click',()=>lb.classList.remove('on'));addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')})})();
 </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-<script src="js/fanmap.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>
+<script src="js/fanmap.js" defer></script>
 </body>
 </html>
