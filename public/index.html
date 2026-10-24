@@ -148,6 +148,12 @@ h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .signup{display:flex;gap:10px;flex-wrap:wrap}
 .signup input{padding:14px 18px;border-radius:999px;border:2px solid var(--ink);font:inherit;min-width:240px}
 .signup .btn{background:var(--ink);color:var(--paper)}
+.signup{align-items:center;max-width:560px}
+.mlnote{margin-top:6px;color:#333;font-weight:600}
+.mlmsg{flex-basis:100%;font-size:.85rem;color:#555;margin-top:2px}
+.mlmsg.ok{color:#0b0b0d;font-weight:700}
+.mlmsg.err{color:#b00020;font-weight:700}
+@media(max-width:560px){.signup input{min-width:0;flex:1 1 100%}.signup .btn{flex:1 1 100%}}
 .wyt{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
 .wyt img{border-radius:18px}
 @media(max-width:860px){.wyt{grid-template-columns:1fr}}
@@ -289,6 +295,7 @@ nav a.navtix{color:var(--acid)}
     <li><a href="#story">Story</a></li>
     <li><a href="#press">Press</a></li>
     <li><a href="#lyrics">Lyrics</a></li>
+    <li><a href="#mailing">Mailing list</a></li>
   </ul>
 </nav>
 
@@ -330,6 +337,17 @@ nav a.navtix{color:var(--acid)}
         <span class="onsale" data-before="Tickets on sale Saturday 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Saturday 31 October, 10am</span>
       </div>
       <a class="btn tix" href="https://www.seetickets.com/tour/the-draymin-liquid-rooms-edinburgh" target="_blank" rel="noopener" data-before="Set a ticket reminder" data-after="Buy tickets">Set a ticket reminder</a>
+    </div>
+    <div class="secret" id="mailing" style="scroll-margin-top:90px">
+      <div>
+        <div class="display">Hear it first</div>
+        <p class="mlnote">Gigs, tickets, merch and news. Straight to your inbox.</p>
+      </div>
+      <form class="signup" id="mlForm" novalidate>
+        <input type="email" name="fields[email]" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
+        <button class="btn" type="submit">Sign me up</button>
+        <p class="mlmsg" id="mlMsg" role="status" aria-live="polite">We'll only email about gigs, merch and news. Unsubscribe any time.</p>
+      </form>
     </div>
     <figure style="margin:30px 0 0"><img class="reveal" src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="border-radius:18px;width:100%;max-height:520px;object-fit:cover" loading="lazy"><figcaption class="credit">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
   </div>
@@ -624,6 +642,18 @@ show.addEventListener('mouseenter',()=>clearInterval(timer));show.addEventListen
 new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)load(cur+1);arm()},{threshold:.3}).observe(show);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(timer);else arm()});
 setPaused(paused);go(0)})();
+
+// mailing list (MailerLite, double opt-in)
+(()=>{const f=document.getElementById('mlForm');if(!f)return;const msg=document.getElementById('mlMsg'),b=f.querySelector('button'),inp=f.querySelector('input');
+const say=(t,c)=>{msg.textContent=t;msg.className='mlmsg'+(c?' '+c:'')};
+f.addEventListener('submit',async e=>{e.preventDefault();const v=inp.value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){say('That email doesn\'t look quite right. Have another go.','err');inp.focus();return}
+ b.disabled=true;b.textContent='Signing you up...';
+ const fd=new FormData();fd.append('fields[email]',v);fd.append('ml-submit','1');fd.append('anticsrf','true');
+ try{const r=await fetch('https://assets.mailerlite.com/jsonp/2738562/forms/202210222495761619/subscribe',{method:'POST',body:fd});const j=await r.json();
+  if(j.success){f.reset();b.textContent='Done';say('Nearly there. Check your inbox and tap the link to confirm.','ok')}
+  else{b.disabled=false;b.textContent='Sign me up';say('That email doesn\'t look quite right. Have another go.','err')}}
+ catch(err){b.disabled=false;b.textContent='Sign me up';say('Something went wrong. Please try again in a minute.','err')}});})();
 
 // release flip
 document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('open');r.addEventListener('click',t);r.addEventListener('keydown',e=>{if(e.key==='Enter')t()})});
