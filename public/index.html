@@ -57,7 +57,7 @@ nav ul a:hover{color:var(--acid)}
 @media(max-width:760px){.board{height:900px}.cut img{max-width:130px;max-height:150px}}
 .cut:hover{box-shadow:0 22px 44px rgba(0,0,0,.65)}
 .cut.drag{cursor:grabbing;box-shadow:0 30px 60px rgba(0,0,0,.7)}
-#lightbox{position:fixed;inset:0;background:rgba(11,11,13,.92);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:100;padding:24px;cursor:zoom-out}
+#lightbox{position:fixed;inset:0;background:rgba(11,11,13,.92);display:none;align-items:center;justify-content:center;flex-direction:column;z-index:2000;padding:24px;cursor:zoom-out}
 #lightbox.on{display:flex}
 #lightbox img{max-width:min(92vw,1000px);max-height:80vh;box-shadow:0 20px 60px #000}
 #lightbox p{margin-top:16px;font-weight:700;letter-spacing:.04em}
@@ -276,6 +276,15 @@ nav a.navtix{color:var(--acid)}
 @media(min-width:701px){.show{aspect-ratio:auto;height:min(70vh,755px)}}
 @media(max-width:700px){.show{aspect-ratio:4/3}}
 @media(prefers-reduced-motion:reduce){.slide,.slide img{transition:none}.slide img{transform:none}}
+
+.gigwrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:28px;align-items:start}
+.gigside{display:flex;flex-direction:column;gap:0;min-width:0}
+.gigside .secret{margin-top:24px}
+.poster{border:0;padding:0;background:none;cursor:zoom-in;position:relative;display:block;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.25);transform:rotate(-1.5deg);transition:transform .25s}
+.poster:hover{transform:rotate(0) scale(1.02)}
+.poster img{width:100%;height:auto}
+.poster span{position:absolute;right:10px;bottom:10px;background:var(--acid);color:var(--ink);font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+@media(max-width:860px){.gigwrap{grid-template-columns:1fr}.poster{max-width:340px;margin:0 auto 6px;order:2}.gigside{order:1}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
@@ -329,27 +338,35 @@ nav a.navtix{color:var(--acid)}
   <div class="wrap">
     <div class="kicker">Next gig</div>
     <h2 class="display reveal">The Liquid Room<br>Edinburgh</h2>
-    <div class="gigcard">
-      <div class="gigdate" aria-hidden="true"><span>Sat</span><b>01</b><span>May 2027</span></div>
-      <div class="giginfo">
-        <strong>The Liquid Room, Edinburgh</strong>
-        <span>Saturday 1 May 2027, 7pm</span>
-        <span class="onsale" data-before="Tickets on sale Saturday 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Saturday 31 October, 10am</span>
+    <div class="gigwrap">
+      <button class="poster" id="posterBtn" type="button" aria-label="View the full gig poster">
+        <img src="img/poster-liquid-room-m.webp" alt="Gig poster: The Draymin, Saturday 1st May 2027, Liquid Rooms, Victoria Street, Edinburgh. Plus support from Fools Gold Indie Clubnight. Tickets on sale Saturday 31st October, 10am, on See Tickets." width="520" height="735" loading="lazy">
+        <span>Tap to enlarge</span>
+      </button>
+      <div class="gigside">
+      <div class="gigcard">
+        <div class="gigdate" aria-hidden="true"><span>Sat</span><b>01</b><span>May 2027</span></div>
+        <div class="giginfo">
+          <strong>The Liquid Room, Edinburgh</strong>
+          <span>Saturday 1 May 2027, 7pm. Victoria Street, Edinburgh</span>
+          <span>Plus support from Fools Gold Indie Clubnight and more TBC</span>
+          <span class="onsale" data-before="Tickets on sale Saturday 31 October, 10am" data-after="Tickets on sale now">Tickets on sale Saturday 31 October, 10am</span>
+        </div>
+        <a class="btn tix" href="https://www.seetickets.com/tour/the-draymin-liquid-rooms-edinburgh" target="_blank" rel="noopener" data-before="Set a ticket reminder" data-after="Buy tickets">Set a ticket reminder</a>
       </div>
-      <a class="btn tix" href="https://www.seetickets.com/tour/the-draymin-liquid-rooms-edinburgh" target="_blank" rel="noopener" data-before="Set a ticket reminder" data-after="Buy tickets">Set a ticket reminder</a>
-    </div>
-    <div class="secret" id="mailing" style="scroll-margin-top:90px">
-      <div>
-        <div class="display">Hear it first</div>
-        <p class="mlnote">Gigs, tickets, merch and news. Straight to your inbox.</p>
+      <div class="secret" id="mailing" style="scroll-margin-top:90px">
+        <div>
+          <div class="display">Hear it first</div>
+          <p class="mlnote">Gigs, tickets, merch and news. Straight to your inbox.</p>
+        </div>
+        <form class="signup" id="mlForm" novalidate>
+          <input type="email" name="fields[email]" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
+          <button class="btn" type="submit">Sign me up</button>
+          <p class="mlmsg" id="mlMsg" role="status" aria-live="polite">We'll only email about gigs, merch and news. Unsubscribe any time.</p>
+        </form>
       </div>
-      <form class="signup" id="mlForm" novalidate>
-        <input type="email" name="fields[email]" placeholder="Your email" aria-label="Your email" autocomplete="email" required>
-        <button class="btn" type="submit">Sign me up</button>
-        <p class="mlmsg" id="mlMsg" role="status" aria-live="polite">We'll only email about gigs, merch and news. Unsubscribe any time.</p>
-      </form>
+      </div>
     </div>
-    <figure style="margin:30px 0 0"><img class="reveal" src="img/alhambra-live-band.webp" alt="The Draymin playing live at the Alhambra, Dunfermline, October 2026" style="border-radius:18px;width:100%;max-height:520px;object-fit:cover" loading="lazy"><figcaption class="credit">Alhambra, October 2026. Photo: Craig Brown Photography</figcaption></figure>
   </div>
 </section>
 
@@ -654,6 +671,10 @@ f.addEventListener('submit',async e=>{e.preventDefault();const v=inp.value.trim(
   if(j.success){f.reset();b.textContent='Done';say('Nearly there. Check your inbox and tap the link to confirm.','ok')}
   else{b.disabled=false;b.textContent='Sign me up';say('That email doesn\'t look quite right. Have another go.','err')}}
  catch(err){b.disabled=false;b.textContent='Sign me up';say('Something went wrong. Please try again in a minute.','err')}});})();
+
+// gig poster: open full size in the lightbox
+(()=>{const b=document.getElementById('posterBtn'),lb=document.getElementById('lightbox');if(!b||!lb)return;
+b.addEventListener('click',()=>{lb.querySelector('img').src='img/poster-liquid-room.webp';lb.querySelector('img').alt='The Draymin, Liquid Rooms, Edinburgh, 1 May 2027 gig poster';lb.querySelector('p').textContent='Liquid Rooms, Edinburgh. Saturday 1 May 2027';lb.classList.add('on')})})();
 
 // release flip
 document.querySelectorAll('.rel').forEach(r=>{const t=()=>r.classList.toggle('open');r.addEventListener('click',t);r.addEventListener('keydown',e=>{if(e.key==='Enter')t()})});
