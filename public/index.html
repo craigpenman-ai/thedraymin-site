@@ -578,7 +578,7 @@ const letters=[word];
 let v=0,holding=false;
 const touch=matchMedia('(pointer:coarse)').matches||('ontouchstart' in window);
 const AC=window.AudioContext||window.webkitAudioContext;let actx=null,gain=null,buf=null,src=null;
-const el=new Audio('media/intro-snippet.mp3');el.loop=true;el.preload='auto';el.setAttribute('playsinline','');let unlocked=!touch;
+const el=new Audio('media/intro-snippet.mp3');el.loop=true;el.preload='none';el.setAttribute('playsinline','');let unlocked=!touch;
 function unlock(){if(unlocked)return;el.muted=true;const p=el.play();
   const done=()=>{if(!holding){el.pause();el.currentTime=0}el.muted=false;unlocked=true;btn.textContent='Hold to make some noise'};
   if(p&&p.then)p.then(done).catch(()=>{el.muted=false});else done()}
