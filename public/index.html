@@ -40,6 +40,7 @@ nav ul a{text-decoration:none}
 .burger i{position:absolute;left:0;right:0;height:3px;background:var(--paper);border-radius:2px;transition:transform .3s,opacity .3s}
 .burger i:nth-child(1){top:2px}.burger i:nth-child(2){top:11px}.burger i:nth-child(3){top:20px}
 nav.open{mix-blend-mode:normal}
+html.menu-open,html.menu-open body{overflow:hidden}
 nav.open .burger i:nth-child(1){transform:translateY(9px) rotate(45deg)}
 nav.open .burger i:nth-child(2){opacity:0}
 nav.open .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
@@ -90,7 +91,8 @@ nav ul a:hover{color:var(--acid)}
 .meter-label{font-size:.8rem;color:var(--muted);min-width:150px}
 
 /* sections */
-section{padding:110px 0}
+section{padding:84px 0;scroll-margin-top:16px}
+@media(max-width:760px){section{padding:44px 0;scroll-margin-top:12px}h2{margin:6px 0 20px}.hint{margin-top:2px}.releases,.timeline{padding-bottom:12px}}
 h2{font-size:clamp(3rem,8vw,6.5rem);margin:10px 0 28px}
 .lede{font-size:1.2rem;max-width:680px;color:#d9d6cf}
 
@@ -294,7 +296,7 @@ nav a.navtix{color:var(--acid)}
   <a class="logo" href="#top">THE DRAYMIN</a>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
   <ul>
-    <li><a href="#gigs" class="navtix">Tickets</a></li>
+    <li><a href="#gigs" class="navtix">Gigs</a></li>
     <li><a href="#video">Video</a></li>
     <li><a href="#band">Band</a></li>
     <li><a href="#photos">Photos</a></li>
@@ -316,7 +318,6 @@ nav a.navtix{color:var(--acid)}
     </div>
     <div>
     <p>1,700 people at the Alhambra said it was time to come back. So we did.</p>
-    <a class="nextgig" href="#gigs"><span class="kicker">Next gig</span> The Liquid Room, Edinburgh. Sat 1 May 2027 <b>Tickets &rarr;</b></a>
     <div class="cheer">
       <button class="btn" id="noise">Hold to make some noise</button>
       <div>
@@ -334,7 +335,7 @@ nav a.navtix{color:var(--acid)}
 
 
 
-<section id="gigs" class="gigs" style="scroll-margin-top:60px">
+<section id="gigs" class="gigs">
   <div class="wrap">
     <div class="kicker">Next gig</div>
     <h2 class="display reveal">The Liquid Room<br>Edinburgh</h2>
@@ -370,7 +371,7 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="video" style="padding-bottom:20px">
+<section id="video">
   <div class="wrap">
     <div class="kicker">Video</div>
     <h2 class="display reveal">Watch it</h2>
@@ -379,9 +380,9 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="band" style="padding-top:70px">
+<section id="band">
   <div class="wrap band">
-    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door"><figcaption class="credit">Photo: Stacey Philip, SP Photography</figcaption></figure>
+    <figure style="margin:0"><img class="reveal" src="img/stage-door.webp" alt="The four members of The Draymin laughing outside a stage door" width="1200" height="1107" style="height:auto"><figcaption class="credit">Photo: Stacey Philip, SP Photography</figcaption></figure>
     <div>
       <div class="kicker">The band</div>
       <h2 class="display reveal">Four lads<br>one door</h2>
@@ -395,7 +396,7 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="photos" style="padding-top:40px;scroll-margin-top:60px">
+<section id="photos">
   <div class="wrap">
     <div class="kicker">Photos</div>
     <h2 class="display reveal">Then<br>and now</h2>
@@ -449,7 +450,7 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="fanmap" class="fan" style="scroll-margin-top:60px">
+<section id="fanmap" class="fan">
   <div class="wrap">
     <div class="kicker">The fan map</div>
     <h2 class="display reveal">Were you<br>there?</h2>
@@ -494,7 +495,7 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="story" style="padding-bottom:40px">
+<section id="story">
   <div class="wrap">
     <div class="kicker">The story</div>
     <h2 class="display reveal">From the Hut<br>to the Alhambra</h2>
@@ -517,7 +518,7 @@ nav a.navtix{color:var(--acid)}
   </div>
 </section>
 
-<section id="press" style="padding-top:20px">
+<section id="press">
   <div class="wrap">
     <div class="kicker">Press</div>
     <h2 class="display reveal">Hold the front page</h2>
@@ -566,7 +567,7 @@ nav a.navtix{color:var(--acid)}
 </section>
 <div id="lightbox"><img alt=""><p></p></div>
 
-<section id="lyrics" style="scroll-margin-top:60px">
+<section id="lyrics">
   <div class="wrap">
     <div class="kicker">Lyrics</div>
     <h2 class="display reveal">Every word</h2>
@@ -599,8 +600,20 @@ addEventListener('scroll',()=>{if(!mob.matches&&scrollY<innerHeight*1.2)hero.sty
 
 // hamburger
 const nav=document.querySelector('nav'),burger=document.getElementById('burger');
-burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
-nav.querySelectorAll('ul a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
+burger.addEventListener('click',()=>{const o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);document.documentElement.classList.toggle('menu-open',o)});
+// in-page links: land exactly, and re-check after late images or fonts shift the page
+const goTo=(id,smooth)=>{const t=document.getElementById(id);if(!t)return;
+  const m=parseFloat(getComputedStyle(t).scrollMarginTop)||0;
+  const y=()=>Math.max(0,t.getBoundingClientRect().top+scrollY-m);
+  scrollTo({top:y(),behavior:smooth?'smooth':'auto'});
+  let n=0,touched=false;const stop=()=>{touched=true};
+  ['wheel','touchstart','keydown'].forEach(e=>addEventListener(e,stop,{once:true,passive:true}));
+  const fix=()=>{if(touched)return;const d=Math.abs(t.getBoundingClientRect().top-m);if(d>4)scrollTo({top:y(),behavior:'auto'});if(++n<6)setTimeout(fix,400)};
+  setTimeout(fix,smooth?900:300)};
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href').slice(1);if(!id||!document.getElementById(id))return;
+  e.preventDefault();const wasOpen=nav.classList.contains('open');nav.classList.remove('open');burger.setAttribute('aria-expanded',false);document.documentElement.classList.remove('menu-open');
+  history.replaceState(null,'','#'+id);setTimeout(()=>goTo(id,!matchMedia('(prefers-reduced-motion:reduce)').matches),wasOpen?60:0)}));
+if(location.hash.length>1)addEventListener('load',()=>goTo(location.hash.slice(1),false));
 
 // make some noise
 const btn=document.getElementById('noise'),lvl=document.getElementById('level'),lab=document.getElementById('levelLabel'),word=document.getElementById('wordmark');
