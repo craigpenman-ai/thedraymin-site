@@ -2,4 +2,5 @@
 
 The Draymin website, live at https://thedraymin.com
 
-Hosted on Cloudflare Pages. No build step: the site is plain files served from the repo root.
+Hosted on Cloudflare (Workers static assets). No build step.
+The site itself lives in /public. wrangler.jsonc tells Cloudflare where to find it.
